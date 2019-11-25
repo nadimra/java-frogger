@@ -51,7 +51,7 @@ public class Main extends Application {
 
 		animal = new Animal("file:src/resources/froggerUp.png");
 		background.add(animal);
-		background.add(new Digit(0, 30, 360, 25));	
+		//background.add(new Digit(0, 30, 360, 25));	
 		background.start();
 		
 		primaryStage.setResizable(false);
@@ -63,29 +63,30 @@ public class Main extends Application {
 	/**
 	 * This method creates a timer that is called in each frame while it is active. 
 	 * 
-	 */
+	*/
 	public void onUpdate() {
-        	timer = new AnimationTimer() {
-        	//  An extending class has to override the method handle(long)
-            @Override
-            public void handle(long now) {
-            	if (animal.changeScore()) {
-            		setNumber(animal.getPoints());
-            	}
-            	if (animal.getStop()) {
-            		System.out.print("STOP");
-            		background.stopMusic();
-            		stop();
-            		background.stop();
-            		Alert alert = new Alert(AlertType.INFORMATION);
-            		alert.setTitle("You Have Won The Game!");
-            		alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
-            		alert.setContentText("Highest Possible Score: 800");
-            		alert.show();
-            	}
-            }
-        };
-    }
+    	timer = new AnimationTimer() {
+    	//  An extending class has to override the method handle(long)
+    		@Override
+	        public void handle(long now) {
+		        	if (animal.changeScore()) {
+		        		setNumber(animal.getPoints());
+		        	}
+		        	if (animal.getStop()) {
+		        		System.out.print("STOP");
+		        		background.stopMusic();
+		        		stop();
+		        		background.stop();
+		        		Alert alert = new Alert(AlertType.INFORMATION);
+		        		alert.setTitle("You Have Won The Game!");
+		        		alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
+		        		alert.setContentText("Highest Possible Score: 800");
+		        		alert.show();
+		        	}
+	        }
+    	};
+	}
+	
 	
 	/**
 	 * This method manages the start of the game.
