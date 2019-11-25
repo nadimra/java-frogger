@@ -18,10 +18,13 @@ public class Animal extends Actor {
 	Image imgA2;
 	Image imgS2;
 	Image imgD2;
+	
 	int points = 0;
 	int end = 0;
+	
 	private boolean second = false;
 	boolean noMove = false;
+	
 	double movement = 13.3333333*2;
 	double movementX = 10.666666*2;
 	int imgSize = 40;
@@ -32,18 +35,21 @@ public class Animal extends Actor {
 	int carD = 0;
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
+	
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(300);
 		setY(679.8+movement);
-		imgW1 = new Image("file:src/p4_group_8_repo/froggerUp.png", imgSize, imgSize, true, true);
-		imgA1 = new Image("file:src/p4_group_8_repo/froggerLeft.png", imgSize, imgSize, true, true);
-		imgS1 = new Image("file:src/p4_group_8_repo/froggerDown.png", imgSize, imgSize, true, true);
-		imgD1 = new Image("file:src/p4_group_8_repo/froggerRight.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/p4_group_8_repo/froggerUpJump.png", imgSize, imgSize, true, true);
-		imgA2 = new Image("file:src/p4_group_8_repo/froggerLeftJump.png", imgSize, imgSize, true, true);
-		imgS2 = new Image("file:src/p4_group_8_repo/froggerDownJump.png", imgSize, imgSize, true, true);
-		imgD2 = new Image("file:src/p4_group_8_repo/froggerRightJump.png", imgSize, imgSize, true, true);
+		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
+		imgA1 = new Image("file:src/resources/froggerLeft.png", imgSize, imgSize, true, true);
+		imgS1 = new Image("file:src/resources/froggerDown.png", imgSize, imgSize, true, true);
+		imgD1 = new Image("file:src/resources/froggerRight.png", imgSize, imgSize, true, true);
+		imgW2 = new Image("file:src/resources/froggerUpJump.png", imgSize, imgSize, true, true);
+		imgA2 = new Image("file:src/resources/froggerLeftJump.png", imgSize, imgSize, true, true);
+		imgS2 = new Image("file:src/resources/froggerDownJump.png", imgSize, imgSize, true, true);
+		imgD2 = new Image("file:src/resources/froggerRightJump.png", imgSize, imgSize, true, true);
+		
+		
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				if (noMove) {
@@ -147,20 +153,20 @@ public class Animal extends Actor {
 				carD++;
 			}
 			if (carD==1) {
-				setImage(new Image("file:src/p4_group_8_repo/cardeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/resources/cardeath1.png", imgSize, imgSize, true, true));
 			}
 			if (carD==2) {
-				setImage(new Image("file:src/p4_group_8_repo/cardeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/resources/cardeath2.png", imgSize, imgSize, true, true));
 			}
 			if (carD==3) {
-				setImage(new Image("file:src/p4_group_8_repo/cardeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/resources/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (carD == 4) {
 				setX(300);
 				setY(679.8+movement);
 				carDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/p4_group_8_repo/froggerUp.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true));
 				noMove = false;
 				if (points>50) {
 					points-=50;
@@ -175,23 +181,23 @@ public class Animal extends Actor {
 				carD++;
 			}
 			if (carD==1) {
-				setImage(new Image("file:src/p4_group_8_repo/waterdeath1.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/resources/waterdeath1.png", imgSize,imgSize , true, true));
 			}
 			if (carD==2) {
-				setImage(new Image("file:src/p4_group_8_repo/waterdeath2.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/resources/waterdeath2.png", imgSize,imgSize , true, true));
 			}
 			if (carD==3) {
-				setImage(new Image("file:src/p4_group_8_repo/waterdeath3.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/resources/waterdeath3.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 4) {
-				setImage(new Image("file:src/p4_group_8_repo/waterdeath4.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/resources/waterdeath4.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 5) {
 				setX(300);
 				setY(679.8+movement);
 				waterDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/p4_group_8_repo/froggerUp.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true));
 				noMove = false;
 				if (points>50) {
 					points-=50;
