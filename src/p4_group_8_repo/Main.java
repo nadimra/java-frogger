@@ -29,6 +29,8 @@ public class Main extends Application {
 	MyStage background;
 	Animal animal;
 	Level level;
+	Score score;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -48,6 +50,7 @@ public class Main extends Application {
 		background.add(froggerback);
 
 		level = new Level(background);
+		score = new Score(background);
 
 		animal = new Animal("file:src/resources/froggerUp.png");
 		background.add(animal);
@@ -70,7 +73,7 @@ public class Main extends Application {
     		@Override
 	        public void handle(long now) {
 		        	if (animal.changeScore()) {
-		        		setNumber(animal.getPoints());
+		        		score.setNumber(animal.getPoints());
 		        	}
 		        	if (animal.getStop()) {
 		        		System.out.print("STOP");
@@ -93,6 +96,7 @@ public class Main extends Application {
 	 * 
 	 */
 	public void startGame() {
+		score.setNumber(0);
 		background.playMusic();
     	onUpdate();
         timer.start();
@@ -106,18 +110,4 @@ public class Main extends Application {
         timer.stop();
     }
     
-	/**
-	 * This method manages the scoring display
-	 * 
-	 */
-    public void setNumber(int n) {
-    	int shift = 0;
-    	while (n > 0) {
-    		  int d = n / 10;
-    		  int k = n - d * 10;
-    		  n = d;
-    		  background.add(new Digit(k, 30, 360 - shift, 25));
-    		  shift+=30;
-    		}
-    }
 }
