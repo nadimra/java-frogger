@@ -25,6 +25,10 @@ import javafx.util.Duration;
 
 
 public class Main extends Application {
+	
+    static final int maxWidth = 600;
+    static final int maxHeight = 800;
+    
 	AnimationTimer timer;
 	MyStage background;
 	Animal animal;
@@ -44,7 +48,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,600,800);
+	    Scene scene  = new Scene(background,maxWidth,maxHeight);
 
 		BackgroundImage froggerback = new BackgroundImage("file:src/resources/iKogsKW.png");	    
 		background.add(froggerback);

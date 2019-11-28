@@ -8,7 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
+/**
+ * The object of this class represents the player character.
+ * 
+ * @author Nadim Rahman
+ * @version 1.0
+ * @since 27-11-2019
+ *
+ */
 public class Animal extends Actor {
 	Image imgW1;
 	Image imgA1;
@@ -22,24 +29,32 @@ public class Animal extends Actor {
 	int points = 0;
 	int end = 0;
 	
-	private boolean second = false;
+	private boolean secondAnimation = false;
 	boolean noMove = false;
 	
 	double movement = 13.3333333*2;
 	double movementX = 10.666666*2;
 	int imgSize = 40;
+	
 	boolean carDeath = false;
 	boolean waterDeath = false;
 	boolean stop = false;
+	
 	boolean changeScore = false;
 	int carD = 0;
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
 	
+	/**
+	 * This method sets up the class and initialises key variables.
+	 * @param imageLink stores the image of the frog.
+	 * 
+	 */
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300);
-		setY(679.8+movement);
+		setX(Main.maxWidth/2);
+		setY(Main.maxHeight-movement*2);
+		
 		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
 		imgA1 = new Image("file:src/resources/froggerLeft.png", imgSize, imgSize, true, true);
 		imgS1 = new Image("file:src/resources/froggerDown.png", imgSize, imgSize, true, true);
@@ -49,107 +64,148 @@ public class Animal extends Actor {
 		imgS2 = new Image("file:src/resources/froggerDownJump.png", imgSize, imgSize, true, true);
 		imgD2 = new Image("file:src/resources/froggerRightJump.png", imgSize, imgSize, true, true);
 		
-		
+		keyPress();
+		keyRelease();
+	}
+	
+	/**
+	 * This method is called when a key is pressed and manages what happens for specific keys.
+	 * 
+	 */
+	public void keyPress() {
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
-				if (noMove) {
-					
-				}
+				KeyCode keyPress = event.getCode();
+				if (noMove) {} // Don't do anything
 				else {
-				if (second) {
-					if (event.getCode() == KeyCode.W) {	  
-		                move(0, -movement);
-		                changeScore = false;
-		                setImage(imgW1);
-		                second = false;
-		            }
-		            else if (event.getCode() == KeyCode.A) {	            	
-		            	 move(-movementX, 0);
-		            	 setImage(imgA1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	 move(0, movement);
-		            	 setImage(imgS1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.D) {	            	
-		            	 move(movementX, 0);
-		            	 setImage(imgD1);
-		            	 second = false;
-		            }
+					// Set sprite back to the normal directional sprite
+					if (getSecondAnimation()) {
+						switch(keyPress) {
+							case W: 
+								changeScore = false;
+								handleVerticalMovement(-movement, imgW1);	 
+								break;
+							case A:       	
+								handleHorizontalMovement(-movementX, imgA1);
+								break;
+							case S:
+								handleVerticalMovement(movement, imgS1);	 
+								break;
+							case D:	            	
+								handleHorizontalMovement(movementX, imgD1);
+								break;
+						}
+					}
+					else {
+						// Set sprite to the 'jumping' directional sprite
+						switch(keyPress) {
+							case W: 
+								handleVerticalMovement(-movement, imgW2);	 
+								break;
+							case A: 
+					            handleHorizontalMovement(-movementX, imgA2);      
+					            break;
+							case S:
+					            handleVerticalMovement(movement, imgS2);	 
+					            break;
+							case D:
+					            handleHorizontalMovement(movementX, imgD2);   
+					            break;
+						}
+					}
 				}
-				else if (event.getCode() == KeyCode.W) {	            	
-	                move(0, -movement);
-	                setImage(imgW2);
-	                second = true;
-	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA2);
-	            	 second = true;
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS2);
-	            	 second = true;
-	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD2);
-	            	 second = true;
-	            }
-	        }
 			}
+				
 		});	
+	}
+	
+	/**
+	 * This method is called when a key is released and manages what happens for specific keys.
+	 * 
+	 */
+	public void keyRelease() {
 		setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event) {
-				if (noMove) {}
+				KeyCode keyPress = event.getCode();
+				if (noMove) {} // Don't do anything
 				else {
-				if (event.getCode() == KeyCode.W) {	  
-					if (getY() < w) {
-						changeScore = true;
-						w = getY();
-						points+=10;
+					switch(keyPress) {
+						case W:
+							if (getY() < w) {
+								changeScore = true;
+								w = getY();
+								points+=10;
+							}
+					        handleVerticalMovement(-movement, imgW1);   
+					        break;         
+						case A:	            	
+					         handleHorizontalMovement(-movementX, imgA1);   
+					         break;
+						case S:
+					         handleVerticalMovement(movement, imgS1);  
+					         break;
+						case D:            	
+					         handleHorizontalMovement(movementX, imgD1);
+					         break;
 					}
-	                move(0, -movement);
-	                setImage(imgW1);
-	                second = false;
-	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD1);
-	            	 second = false;
-	            }
-	        }
+				}
 			}
-			
 		});
 	}
+	
+	/**
+	 * This method handles the horizontal movement of a player.
+	 * @param movePixels is the amount of pixels the sprite should move horizontally.
+	 * @param imageSet is the Image that will be set on the sprite when a movement occurs.
+	 * 
+	 */
+	public void handleHorizontalMovement(double movePixels, Image imageSet) {
+	   	 move(movePixels, 0);
+	   	 setImage(imageSet);
+	   	 setSecondAnimation();
+	}
+	
+	/**
+	 * This method handles the vertical movement of a player.
+	 * @param movePixels is the amount of pixels the sprite should move vertically.
+	 * @param imageSet is the Image that will be set on the sprite when a movement occurs.
+	 * 
+	 */
+	public void handleVerticalMovement(double movePixels, Image imageSet) {
+	   	 move(0, movePixels);
+	   	 setImage(imageSet);
+	   	 setSecondAnimation();
+	}
+	
+	/**
+	 * This method reverts the value of the secondAnimation variable.
+	 * 
+	 */
+	public void setSecondAnimation() {
+		secondAnimation = !getSecondAnimation();
+	}
+	
+	/**
+	 * Method to check if the sprite is 'jumping' or not
+	 * 
+	 */
+	public boolean getSecondAnimation() {
+		return secondAnimation;
+	}
+	
 	
 	@Override
 	public void act(long now) {
 		int bounds = 0;
 		if (getY()<0 || getY()>734) {
-			setX(300);
-			setY(679.8+movement);
+			setY(Main.maxHeight-movement*2);
 		}
 		if (getX()<0) {
 			move(movement*2, 0);
 		}
 		if (carDeath) {
 			noMove = true;
-			if ((now)% 11 ==0) {
+			if ((now)%11 ==0) {
 				carD++;
 			}
 			if (carD==1) {
@@ -173,8 +229,8 @@ public class Animal extends Actor {
 					changeScore = true;
 				}
 			}
-			
 		}
+		
 		if (waterDeath) {
 			noMove = true;
 			if ((now)% 11 ==0) {
@@ -236,9 +292,9 @@ public class Animal extends Actor {
 			inter = (ArrayList<End>) getIntersectingObjects(End.class);
 			if (getIntersectingObjects(End.class).get(0).isActivated()) {
 				end--;
-				points-=50;
+				updatePoints(-50);
 			}
-			points+=50;
+			updatePoints(50);
 			changeScore = true;
 			w=800;
 			getIntersectingObjects(End.class).get(0).setEnd();
@@ -252,12 +308,18 @@ public class Animal extends Actor {
 			//setY(679.8+movement);
 		}
 	}
+	
+	
 	public boolean getStop() {
 		return end==5;
 	}
 	
 	public int getPoints() {
 		return points;
+	}
+	
+	public void updatePoints(int n) {
+		points = getPoints() + n;
 	}
 	
 	public boolean changeScore() {

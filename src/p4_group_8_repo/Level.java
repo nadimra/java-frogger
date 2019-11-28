@@ -13,7 +13,6 @@ public class Level {
 			createAnimals();
 			createEnds();
 			createObstacles();
-
 		}
 		
 		/**
@@ -21,14 +20,40 @@ public class Level {
 		 * 
 		 */
 		private void createLogs() {
+			
+
+			/*background.add(new Log("file:src/resources/log3.png", 150, 0, 700, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 220, 700, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 440, 700, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 150, 0, 650, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 220, 650, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 440, 650, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 150, 0, 600, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 220, 600, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 440, 600, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 150, 0, 550, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 220, 550, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 440, 550, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 150, 0, 500, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 220, 500, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 440, 500, 0.75));
+			*/
+			
 			background.add(new Log("file:src/resources/log3.png", 150, 0, 166, 0.75));
 			background.add(new Log("file:src/resources/log3.png", 150, 220, 166, 0.75));
 			background.add(new Log("file:src/resources/log3.png", 150, 440, 166, 0.75));
+			
 			background.add(new Log("file:src/resources/logs.png", 300, 0, 276, -2));
 			background.add(new Log("file:src/resources/logs.png", 300, 400, 276, -2));
+			
 			background.add(new Log("file:src/resources/log3.png", 150, 50, 329, 0.75));
 			background.add(new Log("file:src/resources/log3.png", 150, 270, 329, 0.75));
 			background.add(new Log("file:src/resources/log3.png", 150, 490, 329, 0.75));
+			
 		}
 		
 		/**
@@ -49,16 +74,16 @@ public class Level {
 		 * 
 		 */
 		private void createObstacles() {
-			//background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 0, 649, 1, 120, 120));
-			//background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 300, 649, 1, 120, 120));
+			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 0, 649, 1, 120, 120));
+			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 300, 649, 1, 120, 120));
 			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 600, 649, 1, 120, 120));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 100, 597, -1, 50, 50));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 250, 597, -1, 50, 50));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 400, 597, -1, 50, 50));
-			background.add(new Obstacle("file:src/resources/car1Left.png", 550, 597, -1, 50, 50));
+			//background.add(new Obstacle("file:src/resources/car1Left.png", 550, 597, -1, 50, 50));
 			//background.add(new Obstacle("file:src/resources/truck2Right.png", 0, 540, 1, 200, 200));
-			background.add(new Obstacle("file:src/resources/truck2Right.png", 500, 540, 1, 200, 200));
-			background.add(new Obstacle("file:src/resources/car1Left.png", 500, 490, -5, 50, 50));
+			//background.add(new Obstacle("file:src/resources/truck2Right.png", 500, 540, 1, 200, 200));
+			//background.add(new Obstacle("file:src/resources/car1Left.png", 500, 500, -5, 50, 50));
 		}
 		
 		/**
