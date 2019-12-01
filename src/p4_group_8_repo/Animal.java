@@ -38,22 +38,20 @@ public class Animal extends Actor {
 	
 	boolean carDeath = false;
 	boolean waterDeath = false;
-	boolean stop = false;
 	
 	boolean changeScore = false;
 	int carD = 0;
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
 	
+
 	/**
 	 * This method sets up the class and initialises key variables.
 	 * @param imageLink stores the image of the frog.
 	 * 
 	 */
 	public Animal(String imageLink) {
-		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(Main.maxWidth/2);
-		setY(Main.maxHeight-movement*2);
+		initialisePlayer(imageLink);
 		
 		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
 		imgA1 = new Image("file:src/resources/froggerLeft.png", imgSize, imgSize, true, true);
@@ -82,7 +80,7 @@ public class Animal extends Actor {
 					if (getSecondAnimation()) {
 						switch(keyPress) {
 							case W: 
-								changeScore = false;
+								setChangeScore(false);
 								handleVerticalMovement(-movement, imgW1);	 
 								break;
 							case A:       	
@@ -132,9 +130,8 @@ public class Animal extends Actor {
 					switch(keyPress) {
 						case W:
 							if (getY() < w) {
-								changeScore = true;
+								updatePoints(10);
 								w = getY();
-								points+=10;
 							}
 					        handleVerticalMovement(-movement, imgW1);   
 					        break;         
@@ -193,113 +190,19 @@ public class Animal extends Actor {
 		return secondAnimation;
 	}
 	
+	/**
+	 * Method to control how the player acts, such as collisions and deaths.
+	 * 
+	 */
 	@Override
 	public void act(long now) {
 		int bounds = 0;
 		
 		handleBoundFrog();
+		handleCarDeath(now);
+		handleWaterDeath(now);
+		handleCollision();
 		
-		if (carDeath) {
-			noMove = true;
-			if ((now)%11 ==0) {
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/resources/cardeath1.png", imgSize, imgSize, true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/resources/cardeath2.png", imgSize, imgSize, true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/resources/cardeath3.png", imgSize, imgSize, true, true));
-			}
-			if (carD == 4) {
-				setX(300);
-				setY(679.8+movement);
-				carDeath = false;
-				carD = 0;
-				setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true));
-				noMove = false;
-				if (points>50) {
-					points-=50;
-					changeScore = true;
-				}
-			}
-		}
-		
-		if (waterDeath) {
-			noMove = true;
-			if ((now)% 11 ==0) {
-				carD++;
-			}
-			if (carD==1) {
-				setImage(new Image("file:src/resources/waterdeath1.png", imgSize,imgSize , true, true));
-			}
-			if (carD==2) {
-				setImage(new Image("file:src/resources/waterdeath2.png", imgSize,imgSize , true, true));
-			}
-			if (carD==3) {
-				setImage(new Image("file:src/resources/waterdeath3.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 4) {
-				setImage(new Image("file:src/resources/waterdeath4.png", imgSize,imgSize , true, true));
-			}
-			if (carD == 5) {
-				setX(300);
-				setY(679.8+movement);
-				waterDeath = false;
-				carD = 0;
-				setImage(new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true));
-				noMove = false;
-				if (points>50) {
-					points-=50;
-					changeScore = true;
-				}
-			}
-			
-		}
-		
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
-		}
-		if (getX() == 240 && getY() == 82) {
-			stop = true;
-		}
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
-			else
-				move (.75,0);
-		}
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
-		}
-		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-				waterDeath = true;
-			} else {
-				move(-1,0);
-			}
-		}
-		else if (getIntersectingObjects(End.class).size() >= 1) {
-			inter = (ArrayList<End>) getIntersectingObjects(End.class);
-			if (getIntersectingObjects(End.class).get(0).isActivated()) {
-				end--;
-				updatePoints(-50);
-			}
-			updatePoints(50);
-			changeScore = true;
-			w=800;
-			getIntersectingObjects(End.class).get(0).setEnd();
-			end++;
-			setX(300);
-			setY(679.8+movement);
-		}
-		else if (getY()<413){
-			waterDeath = true;
-			//setX(300);
-			//setY(679.8+movement);
-		}
 	}
 	
 	/**
@@ -321,21 +224,21 @@ public class Animal extends Actor {
 	 */
 	public void updatePoints(int n) {
 		points = getPoints() + n;
+		setChangeScore(true);
+	}
+	
+	public void setChangeScore(boolean set) {
+		changeScore = set;
+	}
+	
+	public boolean getChangeScore() {
+		return changeScore;
 	}
 	
 	/**
-	 * This method returns a boolean which decides whether to update the score on the GUI or not, and resets the value after.
+	 * Method to bound the player within the screen.
 	 * 
 	 */
-	public boolean changeScore() {
-		if (changeScore) {
-			changeScore = false;
-			return true;
-		}
-		return false;
-		
-	}
-	
 	private void handleBoundFrog() {
 		//Bound the frog to the screen
 		if (getY()<0 || getY()>734) {
@@ -348,5 +251,165 @@ public class Animal extends Actor {
 			move(-movement*2, 0);
 		}
 	}
-
+	
+	/**
+	 * Method to handle the players death when hitting a car.
+	 * 
+	 */
+	private void handleCarDeath(long now) {
+		if (carDeath) {
+			noMove = true;
+			if ((now)%11 ==0) {
+				carD++;
+			}
+			if (carD==1) {
+				setImage(new Image("file:src/resources/cardeath1.png", imgSize, imgSize, true, true));
+			}
+			if (carD==2) {
+				setImage(new Image("file:src/resources/cardeath2.png", imgSize, imgSize, true, true));
+			}
+			if (carD==3) {
+				setImage(new Image("file:src/resources/cardeath3.png", imgSize, imgSize, true, true));
+			}
+			if (carD == 4) {
+				initialisePlayer("file:src/resources/froggerUp.png");
+				if (points>50) {
+					updatePoints(-50);
+					changeScore = true;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Method to handle the players death when touching water.
+	 * 
+	 */
+	private void handleWaterDeath(long now) {
+		if (waterDeath) {
+			noMove = true;
+			if ((now)%11 ==0) {
+				carD++;
+			}
+			if (carD==1) {
+				setImage(new Image("file:src/resources/waterdeath1.png", imgSize,imgSize , true, true));
+			}
+			if (carD==2) {
+				setImage(new Image("file:src/resources/waterdeath2.png", imgSize,imgSize , true, true));
+			}
+			if (carD==3) {
+				setImage(new Image("file:src/resources/waterdeath3.png", imgSize,imgSize , true, true));
+			}
+			if (carD == 4) {
+				setImage(new Image("file:src/resources/waterdeath4.png", imgSize,imgSize , true, true));
+			}
+			if (carD == 5) {
+				initialisePlayer("file:src/resources/froggerUp.png");
+				if (points>50) {
+					updatePoints(-50);
+				}
+			}
+			
+		}
+	}
+	
+	/**
+	 * Method to handle the specific types of collisions between objects.
+	 * 
+	 */
+	private void handleCollision() {
+		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+			carDeath = true;
+		}
+		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
+			handleLogCollision();
+		}
+		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+			handleTurtleCollision();
+		}
+		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+			handleWetTurtleCollision();
+		}
+		else if (getIntersectingObjects(End.class).size() >= 1) {
+			handleEndCollision();
+		}
+		else if (getY()<413){
+			waterDeath = true;
+		}
+	}
+	
+	/**
+	 * Method to control what happens when the player hits a car.
+	 * 
+	 */
+	private void handleCarCollision() {
+		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+			carDeath = true;
+		}
+	}
+	
+	/**
+	 * Method to control what happens when the player hits a log.
+	 * 
+	 */
+	private void handleLogCollision() {
+		if(getIntersectingObjects(Log.class).get(0).getLeft()) {
+			move(-2,0);
+		}
+		else {
+			move (.75,0);
+		}
+	}
+	
+	/**
+	 * Method to control what happens when the player touches a turtle.
+	 * 
+	 */
+	private void handleTurtleCollision() {
+		move(-1,0);
+	}
+	
+	/**
+	 * Method to control what happens when the player touches a wet turtle.
+	 * 
+	 */
+	private void handleWetTurtleCollision() {
+		if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
+			waterDeath = true;
+		} else {
+			move(-1,0);
+		}
+	}
+	
+	/**
+	 * Method to control what happens when the player touches an end object.
+	 * 
+	 */
+	private void handleEndCollision() {
+		inter = (ArrayList<End>) getIntersectingObjects(End.class);
+		if (getIntersectingObjects(End.class).get(0).isActivated()) {
+			end--;
+			updatePoints(-50);
+		}
+		updatePoints(50);
+		w=800;
+		getIntersectingObjects(End.class).get(0).setEnd();
+		end++;
+		initialisePlayer("file:src/resources/froggerUp.png");
+	}
+	
+	/**
+	 * Method to control the player when they get restarted to the start point.
+	 * 
+	 */
+	private void initialisePlayer(String imageLink) {
+		setImage(new Image(imageLink, imgSize, imgSize, true, true));
+		setX(Main.maxWidth/2);
+		setY(Main.maxHeight-movement*2);
+		noMove = false;
+		waterDeath = false;
+		carDeath = false;
+		carD = 0;
+	}
+	
 }

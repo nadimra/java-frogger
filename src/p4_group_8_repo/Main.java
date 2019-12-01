@@ -76,7 +76,7 @@ public class Main extends Application {
     	//  An extending class has to override the method handle(long)
     		@Override
 	        public void handle(long now) {
-		        	if (animal.changeScore()) {
+		        	if (animal.getChangeScore()) {
 		        		score.setNumber(animal.getPoints());
 		        	}
 		        	if (animal.getStop()) {
