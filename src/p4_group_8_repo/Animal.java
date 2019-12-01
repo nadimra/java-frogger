@@ -193,16 +193,12 @@ public class Animal extends Actor {
 		return secondAnimation;
 	}
 	
-	
 	@Override
 	public void act(long now) {
 		int bounds = 0;
-		if (getY()<0 || getY()>734) {
-			setY(Main.maxHeight-movement*2);
-		}
-		if (getX()<0) {
-			move(movement*2, 0);
-		}
+		
+		handleBoundFrog();
+		
 		if (carDeath) {
 			noMove = true;
 			if ((now)%11 ==0) {
@@ -263,9 +259,6 @@ public class Animal extends Actor {
 			
 		}
 		
-		if (getX()>600) {
-			move(-movement*2, 0);
-		}
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
 		}
@@ -309,7 +302,10 @@ public class Animal extends Actor {
 		}
 	}
 	
-	
+	/**
+	 * This method checks if the player has reached all the end points in a level.
+	 * 
+	 */
 	public boolean getStop() {
 		return end==5;
 	}
@@ -318,10 +314,19 @@ public class Animal extends Actor {
 		return points;
 	}
 	
+	/**
+	 * This method updates the points.
+	 * @param n is the amount of points to add to the total points.
+	 * 
+	 */
 	public void updatePoints(int n) {
 		points = getPoints() + n;
 	}
 	
+	/**
+	 * This method returns a boolean which decides whether to update the score on the GUI or not, and resets the value after.
+	 * 
+	 */
 	public boolean changeScore() {
 		if (changeScore) {
 			changeScore = false;
@@ -331,5 +336,17 @@ public class Animal extends Actor {
 		
 	}
 	
+	private void handleBoundFrog() {
+		//Bound the frog to the screen
+		if (getY()<0 || getY()>734) {
+			setY(Main.maxHeight-movement*2);
+		}
+		if (getX()<0-imgSize/2) {
+			move(movement*2, 0);
+		}
+		if (getX()>Main.maxWidth-imgSize/2) {
+			move(-movement*2, 0);
+		}
+	}
 
 }
