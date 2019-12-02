@@ -273,10 +273,6 @@ public class Animal extends Actor {
 			}
 			if (carD == 4) {
 				initialisePlayer("file:src/resources/froggerUp.png");
-				if (points>50) {
-					updatePoints(-50);
-					changeScore = true;
-				}
 			}
 		}
 	}
@@ -305,9 +301,6 @@ public class Animal extends Actor {
 			}
 			if (carD == 5) {
 				initialisePlayer("file:src/resources/froggerUp.png");
-				if (points>50) {
-					updatePoints(-50);
-				}
 			}
 			
 		}
@@ -389,7 +382,6 @@ public class Animal extends Actor {
 		inter = (ArrayList<End>) getIntersectingObjects(End.class);
 		if (getIntersectingObjects(End.class).get(0).isActivated()) {
 			end--;
-			updatePoints(-50);
 		}
 		updatePoints(50);
 		w=800;
