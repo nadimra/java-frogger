@@ -1,15 +1,23 @@
 package p4_group_8_repo;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class MainGameController {
+
+
+public class MainGameController extends Application{
     static final int maxWidth = 600;
     static final int maxHeight = 800;
+    Scene scene;
     
 	AnimationTimer timer;
 	MyStage background;
@@ -19,17 +27,13 @@ public class MainGameController {
 	
 	private Main mainApp;
 	
-	public void setMainApp(Main mainApp) {
-		this.mainApp = mainApp;
-	}
-	
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
-    public void initialize(Stage primaryStage) {
+    public void initialize() {
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,maxWidth,maxHeight);
+	    scene  = new Scene(background,maxWidth,maxHeight);
 
 		BackgroundImage froggerback = new BackgroundImage("file:src/resources/iKogsKW.png");	    
 		background.add(froggerback);
@@ -40,11 +44,12 @@ public class MainGameController {
 		animal = new Animal("file:src/resources/froggerUp.png");
 		background.add(animal);
 		background.start();
-		
-		primaryStage.setResizable(false);
-		primaryStage.setScene(scene);
-		primaryStage.show();
+
+		keyPress();
+		keyRelease();
+
 		startGame();  
+		
 	}
 	/**
 	 * This method creates a timer that is called in each frame while it is active. 
@@ -83,6 +88,7 @@ public class MainGameController {
 		background.playMusic();
     	onUpdate();
         timer.start();
+        
     }
 
 	/**
@@ -92,4 +98,105 @@ public class MainGameController {
     public void stop() {
         timer.stop();
     }
+
+    public Scene getScene() {
+    	return scene;
+    }
+
+	public void setMainApp(Main mainApp) {
+		this.mainApp = mainApp;
+	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+    
+	/**
+	 * This method is called when a key is pressed and manages what happens for specific keys.
+	 * 
+	 */
+	public void keyPress() {
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event){
+				KeyCode keyPress = event.getCode();
+				if (animal.noMove) {} // Don't do anything
+				else {
+					// Set sprite back to the normal directional sprite
+					if (animal.getSecondAnimation()) {
+						switch(keyPress) {
+							case W: 
+								animal.setChangeScore(false);
+								animal.handleVerticalMovement(-animal.movement, animal.imgW1);	 
+								break;
+							case A:       	
+								animal.handleHorizontalMovement(-animal.movementX, animal.imgA1);
+								break;
+							case S:
+								animal.handleVerticalMovement(animal.movement, animal.imgS1);	 
+								break;
+							case D:	            	
+								animal.handleHorizontalMovement(animal.movementX, animal.imgD1);
+								break;
+						}
+					}
+					else {
+						// Set sprite to the 'jumping' directional sprite
+						switch(keyPress) {
+							case W: 
+								animal.handleVerticalMovement(-animal.movement, animal.imgW2);	 
+								break;
+							case A: 
+								animal.handleHorizontalMovement(-animal.movementX, animal.imgA2);      
+					            break;
+							case S:
+								animal.handleVerticalMovement(animal.movement,animal.imgS2);	 
+					            break;
+							case D:
+								animal.handleHorizontalMovement(animal.movementX, animal.imgD2);   
+					            break;
+						}
+					}
+				}
+			}
+				
+		});	
+	}
+	
+	/**
+	 * This method is called when a key is released and manages what happens for specific keys.
+	 * 
+	 */
+	public void keyRelease() {
+		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			public void handle(KeyEvent event) {
+				KeyCode keyPress = event.getCode();
+				if (animal.noMove) {} // Don't do anything
+				else {
+					switch(keyPress) {
+						case W:
+							if (animal.getY() < animal.w) {
+								animal.updatePoints(10);
+								animal.w = animal.getY();
+							}
+							animal.handleVerticalMovement(-animal.movement, animal.imgW1);   
+					        break;         
+						case A:	            	
+							animal.handleHorizontalMovement(-animal.movementX, animal.imgA1);   
+					         break;
+						case S:
+							animal.handleVerticalMovement(animal.movement, animal.imgS1);  
+					         break;
+						case D:            	
+							animal.handleHorizontalMovement(animal.movementX, animal.imgD1);
+					         break;
+					}
+				}
+			}
+		});
+	}
+	
+
 }
+
+

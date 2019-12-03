@@ -24,6 +24,7 @@ public class MenuController {
 	
 	@FXML
 	private void onQuitClick() {
+		 System.exit(0);
 	    
 	}
 	

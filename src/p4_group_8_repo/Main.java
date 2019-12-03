@@ -1,5 +1,6 @@
 package p4_group_8_repo;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +38,8 @@ public class Main extends Application {
 	
     private AnchorPane menuScreen;
     private AnchorPane gameScreen;
-    
+    private AnchorPane pauseScreen;
+
     private MainGameController game;
 
 	
@@ -86,8 +88,37 @@ public class Main extends Application {
     public void showGame() {
             // Load root layout from fxml file.
         	game = new MainGameController();
-        	game.initialize(primaryStage);
-
+        	game.setMainApp(this);
+        	game.initialize();
+        	primaryStage.setScene(game.getScene());
+        	primaryStage.show();
+        	
+        	
     }
+    
+	
+    /**
+     * Initializes the root layout.
+     */
+    public void showPauseMenu() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("PauseMenu.fxml"));
+            pauseScreen = (AnchorPane) loader.load();
+            
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(pauseScreen);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            PauseMenuController controller = loader.getController();
+            controller.setMainApp(this);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     
 }
