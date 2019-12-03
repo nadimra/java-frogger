@@ -91,6 +91,18 @@ public class MainGameController extends Application{
         
     }
 
+	public void pauseGame() {
+		background.stop();
+		timer.stop();
+		mainApp.showPauseMenu();
+
+	}
+	
+	public void continueGame() {
+		background.start();
+		timer.start();
+	}
+	
 	/**
 	 * This method is called whenever the game is stopped, so it will need to stop updating certain objects
 	 * 
@@ -120,23 +132,26 @@ public class MainGameController extends Application{
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				KeyCode keyPress = event.getCode();
-				if (animal.noMove) {} // Don't do anything
+				if(keyPress == KeyCode.ESCAPE) {
+					pauseGame();
+				}
+				if (animal.getNoMove()) {} // Don't do anything
 				else {
 					// Set sprite back to the normal directional sprite
 					if (animal.getSecondAnimation()) {
 						switch(keyPress) {
 							case W: 
 								animal.setChangeScore(false);
-								animal.handleVerticalMovement(-animal.movement, animal.imgW1);	 
+								animal.handleVerticalMovement(-animal.getMoveX(), animal.imgW1);	 
 								break;
 							case A:       	
-								animal.handleHorizontalMovement(-animal.movementX, animal.imgA1);
+								animal.handleHorizontalMovement(-animal.getMoveY(), animal.imgA1);
 								break;
 							case S:
-								animal.handleVerticalMovement(animal.movement, animal.imgS1);	 
+								animal.handleVerticalMovement(animal.getMoveY(), animal.imgS1);	 
 								break;
 							case D:	            	
-								animal.handleHorizontalMovement(animal.movementX, animal.imgD1);
+								animal.handleHorizontalMovement(animal.getMoveX(), animal.imgD1);
 								break;
 						}
 					}
@@ -144,16 +159,16 @@ public class MainGameController extends Application{
 						// Set sprite to the 'jumping' directional sprite
 						switch(keyPress) {
 							case W: 
-								animal.handleVerticalMovement(-animal.movement, animal.imgW2);	 
+								animal.handleVerticalMovement(-animal.getMoveY(), animal.imgW2);	 
 								break;
 							case A: 
-								animal.handleHorizontalMovement(-animal.movementX, animal.imgA2);      
+								animal.handleHorizontalMovement(-animal.getMoveX(), animal.imgA2);      
 					            break;
 							case S:
-								animal.handleVerticalMovement(animal.movement,animal.imgS2);	 
+								animal.handleVerticalMovement(animal.getMoveY(),animal.imgS2);	 
 					            break;
 							case D:
-								animal.handleHorizontalMovement(animal.movementX, animal.imgD2);   
+								animal.handleHorizontalMovement(animal.getMoveX(), animal.imgD2);   
 					            break;
 						}
 					}
@@ -171,13 +186,14 @@ public class MainGameController extends Application{
 		scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event) {
 				KeyCode keyPress = event.getCode();
-				if (animal.noMove) {} // Don't do anything
+				if (animal.getNoMove()) {} // Don't do anything
 				else {
 					switch(keyPress) {
 						case W:
+							double animalW = animal.getW();
 							if (animal.getY() < animal.w) {
 								animal.updatePoints(10);
-								animal.w = animal.getY();
+								animalW = animal.getY();
 							}
 							animal.handleVerticalMovement(-animal.movement, animal.imgW1);   
 					        break;         

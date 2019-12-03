@@ -16,9 +16,9 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="100.0" text="Continue" />
-                  <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" prefWidth="100.0" text="Reset" />
-                  <Button layoutX="260.0" layoutY="35.0" mnemonicParsing="false" prefWidth="100.0" text="Quit" />
+                  <Button mnemonicParsing="false" onAction="#onContinueClick" prefWidth="100.0" text="Continue" />
+                  <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" onAction="#onResetClick" prefWidth="100.0" text="Reset" />
+                  <Button layoutX="260.0" layoutY="35.0" mnemonicParsing="false" onAction="#onQuitClick" prefWidth="100.0" text="Quit" />
                </children>
             </VBox>
          </center>

@@ -91,12 +91,19 @@ public class Main extends Application {
         	game.setMainApp(this);
         	game.initialize();
         	primaryStage.setScene(game.getScene());
-        	primaryStage.show();
-        	
-        	
+        	primaryStage.show();  	
     }
     
-	
+    /**
+     * Initializes the root layout.
+     */
+    public void showContinuedGame() {
+            // Load root layout from fxml file.
+        	game.continueGame();
+        	primaryStage.setScene(game.getScene());
+        	primaryStage.show();  	
+    }
+    
     /**
      * Initializes the root layout.
      */

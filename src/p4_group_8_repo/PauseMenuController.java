@@ -13,7 +13,7 @@ public class PauseMenuController {
 	
 	@FXML
 	private void onContinueClick() {
-	    mainApp.showGame();
+	    mainApp.showContinuedGame();
 	}
 	
 	@FXML

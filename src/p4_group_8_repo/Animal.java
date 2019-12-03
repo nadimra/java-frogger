@@ -318,4 +318,20 @@ public class Animal extends Actor {
 		carD = 0;
 	}
 	
+	
+	public boolean getNoMove() {
+		return noMove;
+	}
+	
+	public double getMoveX() {
+		return movementX;
+	}
+	
+	public double getMoveY() {
+		return movement;
+	}
+	
+	public double getW() {
+		return w;
+	}
 }
