@@ -15,7 +15,9 @@ public class Score {
     static final int maxScore = 800;
     static final int baseWidth = 560;
     static final int baseHeight = 25;
+    private int points;
     Digit[] digits;
+    private boolean changeScore = false;
     
     
     /**
@@ -40,4 +42,28 @@ public class Score {
     		  shift+=1;
     		}
     }
+    
+	public int getPoints() {
+		return points;
+	}
+	
+	/**
+	 * This method updates the points.
+	 * @param n is the amount of points to add to the total points.
+	 * 
+	 */
+	public void updatePoints(int n) {
+		points = getPoints() + n;
+		setChangeScore(true);
+	}
+	
+	public void setChangeScore(boolean set) {
+		changeScore = set;
+	}
+	
+	public boolean getChangeScore() {
+		return changeScore;
+	}
+	
+	
 }

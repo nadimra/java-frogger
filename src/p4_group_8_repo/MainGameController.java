@@ -41,7 +41,7 @@ public class MainGameController extends Application{
 		level = new Level(background);
 		score = new Score(background);
 
-		animal = new Animal("file:src/resources/froggerUp.png");
+		animal = new Animal("file:src/resources/froggerUp.png",score);
 		background.add(animal);
 		background.start();
 
@@ -60,8 +60,8 @@ public class MainGameController extends Application{
     	//  An extending class has to override the method handle(long)
     		@Override
 	        public void handle(long now) {
-		        	if (animal.getChangeScore()) {
-		        		score.setNumber(animal.getPoints());
+		        	if (score.getChangeScore()) {
+		        		score.setNumber(score.getPoints());
 		        	}
 		        	if (animal.getStop()) {
 		        		System.out.print("STOP");
@@ -70,7 +70,7 @@ public class MainGameController extends Application{
 		        		background.stop();
 		        		Alert alert = new Alert(AlertType.INFORMATION);
 		        		alert.setTitle("You Have Won The Game!");
-		        		alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
+		        		alert.setHeaderText("Your High Score: "+score.getPoints()+"!");
 		        		alert.setContentText("Highest Possible Score: 800");
 		        		alert.show();
 		        	}
@@ -94,8 +94,7 @@ public class MainGameController extends Application{
 	public void pauseGame() {
 		background.stop();
 		timer.stop();
-		mainApp.showPauseMenu();
-
+		mainApp.showPauseMenu(score.getPoints());
 	}
 	
 	public void continueGame() {
@@ -141,7 +140,7 @@ public class MainGameController extends Application{
 					if (animal.getSecondAnimation()) {
 						switch(keyPress) {
 							case W: 
-								animal.setChangeScore(false);
+								score.setChangeScore(false);
 								animal.handleVerticalMovement(-animal.getMoveX(), animal.imgW1);	 
 								break;
 							case A:       	
@@ -192,8 +191,8 @@ public class MainGameController extends Application{
 						case W:
 							double animalW = animal.getW();
 							if (animal.getY() < animal.w) {
-								animal.updatePoints(10);
-								animalW = animal.getY();
+								score.updatePoints(10);
+								animal.setW(animal.getY());
 							}
 							animal.handleVerticalMovement(-animal.movement, animal.imgW1);   
 					        break;         

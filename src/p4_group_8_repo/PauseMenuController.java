@@ -10,7 +10,17 @@ public class PauseMenuController {
 	
     @FXML
     private Label scoreText;
+    
+    @FXML
+    private void initialize() {
+        // Initialize the person table with the two columns.
+    }
 	
+    
+    public void setCurrentPoints(int points) {
+    	scoreText.setText("" + points);
+    }
+    
 	@FXML
 	private void onContinueClick() {
 	    mainApp.showContinuedGame();
@@ -19,11 +29,13 @@ public class PauseMenuController {
 	@FXML
 	private void onQuitClick() {
 	    mainApp.showMenu();
+
 	}
 	
 	@FXML
 	private void onResetClick() {
-	    
+	    mainApp.showGame();
+
 	}
 
 	public void setMainApp(Main mainApp) {

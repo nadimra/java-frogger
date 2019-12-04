@@ -19,7 +19,8 @@ public class MenuController {
 	
 	@FXML
 	private void onHelpClick() {
-	    
+	    mainApp.showHelpMenu();
+
 	}
 	
 	@FXML

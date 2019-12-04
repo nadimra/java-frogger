@@ -38,6 +38,7 @@ public class Animal extends Actor {
 	
 	boolean carDeath = false;
 	boolean waterDeath = false;
+	private Score score;
 	
 	boolean changeScore = false;
 	int carD = 0;
@@ -50,8 +51,9 @@ public class Animal extends Actor {
 	 * @param imageLink stores the image of the frog.
 	 * 
 	 */
-	public Animal(String imageLink) {
+	public Animal(String imageLink, Score score) {
 		initialisePlayer(imageLink);
+		this.score = score;
 		
 		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
 		imgA1 = new Image("file:src/resources/froggerLeft.png", imgSize, imgSize, true, true);
@@ -125,28 +127,6 @@ public class Animal extends Actor {
 	 */
 	public boolean getStop() {
 		return end==5;
-	}
-	
-	public int getPoints() {
-		return points;
-	}
-	
-	/**
-	 * This method updates the points.
-	 * @param n is the amount of points to add to the total points.
-	 * 
-	 */
-	public void updatePoints(int n) {
-		points = getPoints() + n;
-		setChangeScore(true);
-	}
-	
-	public void setChangeScore(boolean set) {
-		changeScore = set;
-	}
-	
-	public boolean getChangeScore() {
-		return changeScore;
 	}
 	
 	/**
@@ -297,7 +277,7 @@ public class Animal extends Actor {
 		if (getIntersectingObjects(End.class).get(0).isActivated()) {
 			end--;
 		}
-		updatePoints(50);
+		score.updatePoints(50);
 		w=800;
 		getIntersectingObjects(End.class).get(0).setEnd();
 		end++;
@@ -333,5 +313,9 @@ public class Animal extends Actor {
 	
 	public double getW() {
 		return w;
+	}
+	
+	public void setW(double setW) {
+		w = setW;
 	}
 }
