@@ -66,19 +66,11 @@ public class MainGameController extends Application{
 		        		score.setNumber(score.getPoints());
 		        	}
 		        	if (animal.getStop()) {
-		        		System.out.print("STOP");
-		        		background.stopMusic();
-		        		stop();
-		        		background.stop();
-		        		Alert alert = new Alert(AlertType.INFORMATION);
-		        		alert.setTitle("You Have Won The Game!");
-		        		alert.setHeaderText("Your High Score: "+score.getPoints()+"!");
-		        		alert.setContentText("Highest Possible Score: 800");
-		        		alert.show();
+		        		handleGameOver(true);
 		        	}
 		        	lives.updateLives();
 		        	if(lives.getGameOver()) {
-		        		handleGameOver();
+		        		handleGameOver(false);
 		        	}
 
 	        }
@@ -131,12 +123,11 @@ public class MainGameController extends Application{
 		
 	}
     
-	public void handleGameOver() {
+	public void handleGameOver(boolean win) {
 		background.stopMusic();
 		stop();
 		background.stop();
-		mainApp.showGameOver(score.getPoints());
-
+		mainApp.showGameOver(score.getPoints(),win);
 	}
 	
 	/**

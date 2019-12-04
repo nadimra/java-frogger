@@ -158,7 +158,7 @@ public class Main extends Application {
     /**
      * Initializes the root layout.
      */
-    public void showGameOver(int points) {
+    public void showGameOver(int points, boolean win) {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
@@ -172,6 +172,7 @@ public class Main extends Application {
             
             GameOverController controller = loader.getController();
             controller.setPoints(points);
+            controller.setWinOrLose(win);
             controller.setMainApp(this);
             
         } catch (IOException e) {

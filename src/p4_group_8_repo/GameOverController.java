@@ -13,9 +13,21 @@ public class GameOverController {
 	
 	@FXML
 	private Label scoreText;
+	
+	@FXML
+	private Label winOrLose;
 
     public void setPoints(int points) {
     	scoreText.setText("" + points);
+    }
+    
+    public void setWinOrLose(boolean win) {
+    	if(win) {
+    		winOrLose.setText("YOU WON");
+    	}
+    	else {
+    		winOrLose.setText("YOU LOST");
+    	}
     }
     
 	@FXML

@@ -34,14 +34,14 @@
          <top>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER">
+                  <Label fx:id="winOrLose" text="GAME OVER" textFill="WHITE">
                      <font>
                         <Font name="Agency FB" size="70.0" />
                      </font>
                      <VBox.margin>
                         <Insets top="100.0" />
                      </VBox.margin>
-                  </Text>
+                  </Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Text fill="#ffe100" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE:" />
