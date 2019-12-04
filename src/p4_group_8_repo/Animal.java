@@ -38,12 +38,16 @@ public class Animal extends Actor {
 	
 	boolean carDeath = false;
 	boolean waterDeath = false;
+	int deathCount;
+	LivesManager lives;
+	
 	private Score score;
 	
 	boolean changeScore = false;
 	int carD = 0;
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
+	private boolean updateDeath;
 	
 
 	/**
@@ -51,9 +55,10 @@ public class Animal extends Actor {
 	 * @param imageLink stores the image of the frog.
 	 * 
 	 */
-	public Animal(String imageLink, Score score) {
+	public Animal(String imageLink, Score score, LivesManager lives) {
 		initialisePlayer(imageLink);
 		this.score = score;
+		this.lives = lives;
 		
 		imgW1 = new Image("file:src/resources/froggerUp.png", imgSize, imgSize, true, true);
 		imgA1 = new Image("file:src/resources/froggerLeft.png", imgSize, imgSize, true, true);
@@ -167,7 +172,10 @@ public class Animal extends Actor {
 			}
 			if (carD == 4) {
 				initialisePlayer("file:src/resources/froggerUp.png");
+				lives.loseLife();
+
 			}
+
 		}
 	}
 	
@@ -195,7 +203,10 @@ public class Animal extends Actor {
 			}
 			if (carD == 5) {
 				initialisePlayer("file:src/resources/froggerUp.png");
+				lives.loseLife();
+
 			}
+
 			
 		}
 	}
@@ -232,6 +243,7 @@ public class Animal extends Actor {
 	private void handleCarCollision() {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
+			lives.loseLife();
 		}
 	}
 	
@@ -263,6 +275,7 @@ public class Animal extends Actor {
 	private void handleWetTurtleCollision() {
 		if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 			waterDeath = true;
+			lives.loseLife();
 		} else {
 			move(-1,0);
 		}
@@ -318,4 +331,7 @@ public class Animal extends Actor {
 	public void setW(double setW) {
 		w = setW;
 	}
+	
+
+	
 }

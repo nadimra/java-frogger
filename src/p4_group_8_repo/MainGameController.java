@@ -24,6 +24,7 @@ public class MainGameController extends Application{
 	Animal animal;
 	Level level;
 	Score score;
+	LivesManager lives;
 	
 	private Main mainApp;
 	
@@ -40,8 +41,9 @@ public class MainGameController extends Application{
 
 		level = new Level(background);
 		score = new Score(background);
+		lives = new LivesManager(background,3);
 
-		animal = new Animal("file:src/resources/froggerUp.png",score);
+		animal = new Animal("file:src/resources/froggerUp.png",score,lives);
 		background.add(animal);
 		background.start();
 
@@ -60,7 +62,7 @@ public class MainGameController extends Application{
     	//  An extending class has to override the method handle(long)
     		@Override
 	        public void handle(long now) {
-		        	if (score.getChangeScore()) {
+		        	if (score.updateScore()) {
 		        		score.setNumber(score.getPoints());
 		        	}
 		        	if (animal.getStop()) {
@@ -74,6 +76,19 @@ public class MainGameController extends Application{
 		        		alert.setContentText("Highest Possible Score: 800");
 		        		alert.show();
 		        	}
+		        	lives.updateLives();
+		        	if(lives.getGameOver()) {
+		        		System.out.print("STOP");
+		        		background.stopMusic();
+		        		stop();
+		        		background.stop();
+		        		Alert alert = new Alert(AlertType.INFORMATION);
+		        		alert.setTitle("You Have lost The Game!");
+		        		alert.setHeaderText("Your High Score: "+score.getPoints()+"!");
+		        		alert.setContentText("Highest Possible Score: 800");
+		        		alert.show();
+		        	}
+
 	        }
     	};
 	}

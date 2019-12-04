@@ -65,5 +65,13 @@ public class Score {
 		return changeScore;
 	}
 	
+	public boolean updateScore() {
+		if(changeScore) {
+			changeScore = false;
+			return true;
+		}
+		return false;
+	}
+	
 	
 }
