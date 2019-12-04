@@ -4,16 +4,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class HelpMenuController {
+public class GameOverController {
 
 	private Main mainApp;
 	
+	@FXML
+	private Label feedbackString;
+	
+	@FXML
+	private Label scoreText;
 
-    @FXML
-    private void initialize() {
-        // Initialize the person table with the two columns.
+    public void setPoints(int points) {
+    	scoreText.setText("" + points);
     }
-
+    
 	@FXML
 	private void onQuitClick() {
 	    mainApp.showMenu();
@@ -22,8 +26,8 @@ public class HelpMenuController {
 	@FXML
 	private void onResetClick() {
 	    mainApp.showGame();
-	}
 
+	}
 	public void setMainApp(Main mainApp) {
 		this.mainApp = mainApp;
 	}

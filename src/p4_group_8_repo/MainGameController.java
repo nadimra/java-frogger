@@ -78,15 +78,7 @@ public class MainGameController extends Application{
 		        	}
 		        	lives.updateLives();
 		        	if(lives.getGameOver()) {
-		        		System.out.print("STOP");
-		        		background.stopMusic();
-		        		stop();
-		        		background.stop();
-		        		Alert alert = new Alert(AlertType.INFORMATION);
-		        		alert.setTitle("You Have lost The Game!");
-		        		alert.setHeaderText("Your High Score: "+score.getPoints()+"!");
-		        		alert.setContentText("Highest Possible Score: 800");
-		        		alert.show();
+		        		handleGameOver();
 		        	}
 
 	        }
@@ -132,12 +124,21 @@ public class MainGameController extends Application{
 	public void setMainApp(Main mainApp) {
 		this.mainApp = mainApp;
 	}
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
     
+	public void handleGameOver() {
+		background.stopMusic();
+		stop();
+		background.stop();
+		mainApp.showGameOver(score.getPoints());
+
+	}
+	
 	/**
 	 * This method is called when a key is pressed and manages what happens for specific keys.
 	 * 

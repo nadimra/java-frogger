@@ -39,6 +39,8 @@ public class Main extends Application {
     private AnchorPane menuScreen;
     private AnchorPane gameScreen;
     private AnchorPane pauseScreen;
+    private AnchorPane gameOverScreen;
+
 
     private MainGameController game;
 
@@ -145,6 +147,31 @@ public class Main extends Application {
             primaryStage.show();
             
             HelpMenuController controller = loader.getController();
+            controller.setMainApp(this);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    /**
+     * Initializes the root layout.
+     */
+    public void showGameOver(int points) {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("GameOver.fxml"));
+            gameOverScreen = (AnchorPane) loader.load();
+            
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(gameOverScreen);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            GameOverController controller = loader.getController();
+            controller.setPoints(points);
             controller.setMainApp(this);
             
         } catch (IOException e) {

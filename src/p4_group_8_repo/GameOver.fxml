@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="p4_group_8_repo.GameOverController">
+   <children>
+      <BorderPane layoutX="111.0" layoutY="154.0" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #191970;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefWidth="120.0" text="View Highscores">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" prefWidth="120.0" text="Submit Highscore">
+                     <VBox.margin>
+                        <Insets bottom="80.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" onAction="#onResetClick" prefWidth="120.0" text="Reset" />
+                  <Button layoutX="260.0" layoutY="35.0" mnemonicParsing="false" onAction="#onQuitClick" prefWidth="120.0" text="Quit" />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER">
+                     <font>
+                        <Font name="Agency FB" size="70.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="100.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text fill="#ffe100" strokeType="OUTSIDE" strokeWidth="0.0" text="SCORE:" />
+                        <Label fx:id="scoreText" text="0" textFill="RED">
+                           <font>
+                              <Font size="48.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="feedbackString" text="Try again to get in the highscores!" textFill="#ffe100" />
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
