@@ -25,9 +25,13 @@ public class MainGameController extends Application{
 	Level level;
 	Score score;
 	LivesManager lives;
+	DisplayTimer displayTimer;
+
+	
 	
 	private Main mainApp;
-	
+	private int seconds;
+
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
@@ -42,6 +46,7 @@ public class MainGameController extends Application{
 		level = new Level(background);
 		score = new Score(background);
 		lives = new LivesManager(background,3);
+		displayTimer = new DisplayTimer(background, 20);
 
 		animal = new Animal("file:src/resources/froggerUp.png",score,lives);
 		background.add(animal);
@@ -60,6 +65,7 @@ public class MainGameController extends Application{
 	public void onUpdate() {
     	timer = new AnimationTimer() {
     	//  An extending class has to override the method handle(long)
+
     		@Override
 	        public void handle(long now) {
 		        	if (score.updateScore()) {
@@ -72,6 +78,18 @@ public class MainGameController extends Application{
 		        	if(lives.getGameOver()) {
 		        		handleGameOver(false);
 		        	}
+		        	if(displayTimer.getTimesUp()) {
+		        		handleGameOver(false);
+		        	}
+		        	if (displayTimer.getLastTime() != 0) {
+		                 if (now > displayTimer.getLastTime() + 1_000_000_000) {
+		                     displayTimer.incrementSeconds();
+		                     displayTimer.setLastTime(now);
+		                 }
+		            } else {
+	                     displayTimer.setLastTime(now);
+
+		            }
 
 	        }
     	};
@@ -87,7 +105,6 @@ public class MainGameController extends Application{
 		background.playMusic();
     	onUpdate();
         timer.start();
-        
     }
 
 	public void pauseGame() {

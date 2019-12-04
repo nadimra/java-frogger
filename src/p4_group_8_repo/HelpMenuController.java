@@ -15,14 +15,10 @@ public class HelpMenuController {
     }
 
 	@FXML
-	private void onQuitClick() {
+	private void onBackClick() {
 	    mainApp.showMenu();
 	}
 	
-	@FXML
-	private void onResetClick() {
-	    mainApp.showGame();
-	}
 
 	public void setMainApp(Main mainApp) {
 		this.mainApp = mainApp;
