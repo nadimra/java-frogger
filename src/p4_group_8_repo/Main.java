@@ -38,6 +38,7 @@ public class Main extends Application {
 	private Stage primaryStage;
 	
     private AnchorPane menuScreen;
+    private AnchorPane helpScreen;
     private AnchorPane gameScreen;
     private AnchorPane pauseScreen;
     private AnchorPane gameOverScreen;
@@ -142,10 +143,10 @@ public class Main extends Application {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("HelpMenu.fxml"));
-            menuScreen = (AnchorPane) loader.load();
+            helpScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
-            Scene scene = new Scene(menuScreen);
+            Scene scene = new Scene(helpScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
