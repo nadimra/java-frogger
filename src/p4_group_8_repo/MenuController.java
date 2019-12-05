@@ -14,7 +14,7 @@ public class MenuController {
 	
 	@FXML
 	private void onHighScoreClick() {
-	    
+		mainApp.showHighscoreScreen();
 	}
 	
 	@FXML

@@ -1,20 +1,26 @@
 package p4_group_8_repo;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Highscore {
 
-	    private int score;
-	    private String name;
+	    private IntegerProperty score;
+	    private StringProperty name;
 	    
 	    public Highscore(String name, int score) {
-	        this.score = score;
-	        this.name = name;
+	    	
+	    	
+	        this.score = new SimpleIntegerProperty(score);
+	        this.name = new SimpleStringProperty(name);
 	    }
 
-	    public int getScore() {
+	    public IntegerProperty getScore() {
 	        return score;
 	    }
-
-	    public String getName() {
+	    public StringProperty getName() {
 	        return name;
 	    }
 

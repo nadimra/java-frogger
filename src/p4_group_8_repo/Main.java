@@ -40,6 +40,8 @@ public class Main extends Application {
     private AnchorPane gameScreen;
     private AnchorPane pauseScreen;
     private AnchorPane gameOverScreen;
+    private AnchorPane highscoreScreen;
+
 
 
     private MainGameController game;
@@ -174,6 +176,31 @@ public class Main extends Application {
             controller.setPoints(points);
             controller.setWinOrLose(win);
             controller.setMainApp(this);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Initializes the root layout.
+     */
+    public void showHighscoreScreen() {
+        try {
+            // Load root layout from fxml file.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("Highscore.fxml"));
+            highscoreScreen = (AnchorPane) loader.load();
+            
+            // Show the scene containing the root layout.
+            Scene scene = new Scene(highscoreScreen);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            
+            HighscoreController controller = loader.getController();
+            //controller.setValuesInTable(new HighscoreManager().getScores());
+
+            controller.setMainApp(this,new HighscoreManager().getScores());
             
         } catch (IOException e) {
             e.printStackTrace();

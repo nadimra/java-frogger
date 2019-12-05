@@ -1,6 +1,14 @@
 package p4_group_8_repo;
 
 import java.util.*;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.*;
 
 public class HighscoreManager {
@@ -17,15 +25,18 @@ public class HighscoreManager {
         scores = new ArrayList<Highscore>();
     }
     
-    public ArrayList<Highscore> getScores() throws FileNotFoundException {
+    public ObservableList<Highscore> getScores() throws FileNotFoundException {
         loadScoreFile();
-        return scores;
+        ObservableList<Highscore> observableScores = FXCollections.observableArrayList(scores);
+        return observableScores;
     }
     
     public boolean checkTopTen(int userScore) throws FileNotFoundException {
         loadScoreFile();
-        int lastScore = scores.get(scores.size() - 1).getScore() ;
-        if(userScore > lastScore) {
+        IntegerProperty userScoreIntProperty = new SimpleIntegerProperty(userScore);
+
+        IntegerProperty lastScore = scores.get(scores.size() - 1).getScore() ;
+        if(userScoreIntProperty.getValue() > lastScore.getValue()) {
         	return true;
         }
 		return false;
@@ -84,7 +95,8 @@ public class HighscoreManager {
              
             //Write a new student object list to the CSV file
             for (Highscore hs : scores) {
-                fileWriter.append(hs.getName());
+            	
+                fileWriter.append(hs.getName().getValue());
                 fileWriter.append(COMMA_DELIMITER);
                 fileWriter.append(String.valueOf(hs.getScore()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
@@ -112,11 +124,11 @@ public class HighscoreManager {
     
     public void getHighscoreString() throws FileNotFoundException {
 
-        ArrayList<Highscore> scores;
+        ObservableList<Highscore> scores;
         scores = getScores();
 
         for(Highscore hs: scores) {
-        	System.out.println(hs.getName());
+        	System.out.println(hs.getName().getValue());
         }
     }
 }
