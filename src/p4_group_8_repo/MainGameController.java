@@ -55,6 +55,7 @@ public class MainGameController extends Application{
 		startGame();  
 		
 	}
+    
 	/**
 	 * This method creates a timer that is called in each frame while it is active. 
 	 * 

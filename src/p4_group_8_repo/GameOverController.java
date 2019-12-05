@@ -16,12 +16,30 @@ public class GameOverController {
 	
 	@FXML
 	private Label winOrLose;
+	
+	@FXML
+	private Button submitButton;
+	
+	boolean earnedHighscore;
+	
+	int points;
+	
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+    @FXML
+    private void initialize() {
+        submitButton.setDisable(true);
+    }
 
     public void setPoints(int points) {
+    	this.points = points;
     	scoreText.setText("" + points);
     }
     
     public void setWinOrLose(boolean win) {
+        submitButton.setDisable(false);
     	if(win) {
     		winOrLose.setText("YOU WON");
     	}
@@ -31,6 +49,7 @@ public class GameOverController {
     }
     
     public void setFeedbackString(boolean earnedHighscore) {
+    	this.earnedHighscore = earnedHighscore;
     	if(earnedHighscore) {
     		feedbackString.setText("You got a highscore!, Click the button submit your score!");
     	}
@@ -39,6 +58,18 @@ public class GameOverController {
     	}
     }
     
+	@FXML
+	private void onViewHighscoreClick() {
+	    mainApp.showHighscoreScreen();
+	}
+    
+	@FXML
+	private void onSubmitHighscoreClick() {
+		if(earnedHighscore) {
+		    mainApp.showHighscoreInput(points);
+		}
+	}
+	
 	@FXML
 	private void onQuitClick() {
 	    mainApp.showMenu();

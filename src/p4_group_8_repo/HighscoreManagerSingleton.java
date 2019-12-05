@@ -35,6 +35,7 @@ public class HighscoreManagerSingleton {
     public ObservableList<Highscore> getScores() throws FileNotFoundException {
         loadScoreFile();
         ObservableList<Highscore> observableScores = FXCollections.observableArrayList(scores);
+
         return observableScores;
     }
     
@@ -85,6 +86,7 @@ public class HighscoreManagerSingleton {
     }
     
     private void convertRecords(List<List<String>> records) {
+    	scores.clear();
     	for(List<String> record : records) {
     		String name = record.get(0);
     		int score = Integer.parseInt(record.get(1));
@@ -105,16 +107,13 @@ public class HighscoreManagerSingleton {
             	
                 fileWriter.append(hs.getName().getValue());
                 fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(String.valueOf(hs.getScore()));
+                fileWriter.append(String.valueOf(hs.getScore().getValue()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
  
              
-             
-            System.out.println("CSV file was created successfully !!!");
-             
+                          
         } catch (Exception e) {
-            System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         } finally {
              
@@ -122,7 +121,6 @@ public class HighscoreManagerSingleton {
                 fileWriter.flush();
                 fileWriter.close();
             } catch (IOException e) {
-                System.out.println("Error while flushing/closing fileWriter !!!");
                 e.printStackTrace();
             }
              

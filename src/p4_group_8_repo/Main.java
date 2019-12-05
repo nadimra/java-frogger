@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -204,6 +205,36 @@ public class Main extends Application {
             controller.setMainApp(this,HighscoreManagerSingleton.getInstance().getScores());
             
         } catch (IOException e) {
+        }
+    }
+    
+    public boolean showHighscoreInput(int points) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("HighscoreInput.fxml"));
+            AnchorPane highscoreInput = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("New Highscore");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(highscoreInput);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            HighscoreInputController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setSubmitScore(points);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
     

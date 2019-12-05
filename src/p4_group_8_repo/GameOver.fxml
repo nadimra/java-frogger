@@ -16,12 +16,12 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="120.0" text="View Highscores">
+                  <Button mnemonicParsing="false" onAction="#onViewHighscoreClick" prefWidth="120.0" text="View Highscores">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
                   </Button>
-                  <Button layoutX="260.0" layoutY="10.0" mnemonicParsing="false" prefWidth="120.0" text="Submit Highscore">
+                  <Button fx:id="submitButton" layoutX="260.0" layoutY="10.0" mnemonicParsing="false" onAction="#onSubmitHighscoreClick" prefWidth="120.0" text="Submit Highscore">
                      <VBox.margin>
                         <Insets bottom="80.0" />
                      </VBox.margin>

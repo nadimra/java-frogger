@@ -27,7 +27,6 @@ public class HighscoreController {
 	   	nameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
 	   	scoreColumn.setCellValueFactory(cellData -> cellData.getValue().getScore().asObject());
 	    scoreTable.getSelectionModel().setCellSelectionEnabled(false);
-
     }
     
     public void setValuesInTable(ObservableList<Highscore> listTable) {

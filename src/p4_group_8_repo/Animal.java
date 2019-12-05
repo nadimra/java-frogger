@@ -243,7 +243,6 @@ public class Animal extends Actor {
 	private void handleCarCollision() {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
 			carDeath = true;
-			lives.loseLife();
 		}
 	}
 	
@@ -275,7 +274,6 @@ public class Animal extends Actor {
 	private void handleWetTurtleCollision() {
 		if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 			waterDeath = true;
-			lives.loseLife();
 		} else {
 			move(-1,0);
 		}
