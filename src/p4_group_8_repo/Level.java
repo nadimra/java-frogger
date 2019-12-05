@@ -43,16 +43,20 @@ public class Level {
 			background.add(new Log("file:src/resources/log3.png", 150, 440, 500, 0.75));
 			*/
 			
-			background.add(new Log("file:src/resources/log3.png", 150, 0, 166, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 150, 220, 166, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 150, 440, 166, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 0, 150 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 220, 150 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 440, 150 +8, 0.75));
 			
-			background.add(new Log("file:src/resources/logs.png", 300, 0, 276, -2));
-			background.add(new Log("file:src/resources/logs.png", 300, 400, 276, -2));
+			background.add(new Log("file:src/resources/logs.png", 35, 300, 0, 250 + 8, -2));
+			background.add(new Log("file:src/resources/logs.png", 35, 300, 400, 250 + 8, -2));
 			
-			background.add(new Log("file:src/resources/log3.png", 150, 50, 329, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 150, 270, 329, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 150, 490, 329, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 50, 300 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 270, 300 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 490, 300 + 8, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 50, 400 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 270, 400 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 35, 150, 490, 400 + 8, 0.75));
 			
 		}
 		
@@ -61,12 +65,11 @@ public class Level {
 		 * 
 		 */
 		private void createAnimals() {
-			background.add(new Turtle(500, 376, -1, 130, 130));
-			background.add(new Turtle(300, 376, -1, 130, 130));
-			background.add(new WetTurtle(700, 376, -1, 130, 130));
-			background.add(new WetTurtle(600, 217, -1, 130, 130));
-			background.add(new WetTurtle(400, 217, -1, 130, 130));
-			background.add(new WetTurtle(200, 217, -1, 130, 130));
+			background.add(new Turtle(500, 350, -1, 130, 50));
+			background.add(new Turtle(300, 350, -1, 130, 50));
+			background.add(new WetTurtle(700, 200, -1, 130, 50));
+			background.add(new WetTurtle(400, 200, -1, 130, 50));
+			background.add(new WetTurtle(200, 200, -1, 130, 50));
 		}
 		
 		/**
@@ -74,9 +77,9 @@ public class Level {
 		 * 
 		 */
 		private void createObstacles() {
-			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 0, 649, 1, 120, 120));
-			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 300, 649, 1, 120, 120));
-			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 600, 649, 1, 120, 120));
+			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 0, 650 + 8, 1, 120, 35));
+			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 300, 650 + 8, 1, 120, 35));
+			background.add(new Obstacle("file:src/resources/truck1"+"Right.png", 600, 650 + 8, 1, 120, 35));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 100, 597, -1, 50, 50));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 250, 597, -1, 50, 50));
 			//background.add(new Obstacle("file:src/resources/car1Left.png", 400, 597, -1, 50, 50));

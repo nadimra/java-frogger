@@ -32,7 +32,7 @@ public class Animal extends Actor {
 	private boolean secondAnimation = false;
 	boolean noMove = false;
 	
-	double movement = 13.3333333*2;
+	double movement = 12.5*2;
 	double movementX = 10.666666*2;
 	int imgSize = 40;
 	
@@ -140,8 +140,8 @@ public class Animal extends Actor {
 	 */
 	private void handleBoundFrog() {
 		//Bound the frog to the screen
-		if (getY()<0 || getY()>734) {
-			setY(Main.maxHeight-movement*2);
+		if (getY()<0 || getY()>Main.maxHeight-movement*1.5) {
+			setY(Main.maxHeight-movement*1.5);
 		}
 		if (getX()<0-imgSize/2) {
 			move(movement*2, 0);
@@ -302,7 +302,7 @@ public class Animal extends Actor {
 	private void initialisePlayer(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(Main.maxWidth/2);
-		setY(Main.maxHeight-movement*2);
+		setY(Main.maxHeight-movement*1.5);
 		noMove = false;
 		waterDeath = false;
 		carDeath = false;

@@ -42,7 +42,7 @@ public class MainGameController extends Application{
 	    background = new MyStage();
 	    scene  = new Scene(background,maxWidth,maxHeight);
 
-		BackgroundImage froggerback = new BackgroundImage("file:src/resources/iKogsKW.png");	    
+		BackgroundImage froggerback = new BackgroundImage("file:src/resources/background.png");	    
 		background.add(froggerback);
 
 		level = new Level(background);

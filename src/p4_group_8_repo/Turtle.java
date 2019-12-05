@@ -29,9 +29,9 @@ public class Turtle extends Actor{
 			setX(600);
 	}
 	public Turtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/resources/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:src/resources/TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image("file:src/resources/TurtleAnimation3.png", w, h, true, true);
+		turtle1 = new Image("file:src/resources/TurtleAnimation1.png", w, h, false, true);
+		turtle2 = new Image("file:src/resources/TurtleAnimation2.png", w, h, false, true);
+		turtle3 = new Image("file:src/resources/TurtleAnimation3.png", w, h, false, true);
 		setX(xpos);
 		setY(ypos);
 		speed = s;

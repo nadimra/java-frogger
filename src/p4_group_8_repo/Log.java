@@ -14,8 +14,8 @@ public class Log extends Actor {
 			setX(700);
 	}
 	
-	public Log(String imageLink, int size, int xpos, int ypos, double s) {
-		setImage(new Image(imageLink, size,size, true, true));
+	public Log(String imageLink, int xSize, int ySize, int xpos, int ypos, double s) {
+		setImage(new Image(imageLink, ySize,xSize, false, true));
 		setX(xpos);
 		setY(ypos);
 		speed = s;
