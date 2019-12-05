@@ -92,7 +92,12 @@ public class MainGameController extends Application{
 						}
 		        	}
 		        	if(displayTimer.getTimesUp()) {
-		        		handleGameOver(false);
+		        		try {
+							handleGameOver(false);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		        	}
 		        	if (displayTimer.getLastTime() != 0) {
 		                 if (now > displayTimer.getLastTime() + 1_000_000_000) {
