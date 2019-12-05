@@ -30,6 +30,15 @@ public class GameOverController {
     	}
     }
     
+    public void setFeedbackString(boolean earnedHighscore) {
+    	if(earnedHighscore) {
+    		feedbackString.setText("You got a highscore!, Click the button submit your score!");
+    	}
+    	else {
+    		feedbackString.setText("Try again to get in the highscores!");
+    	}
+    }
+    
 	@FXML
 	private void onQuitClick() {
 	    mainApp.showMenu();

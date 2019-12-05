@@ -6,5 +6,5 @@ meabh,50
 josh,50
 croissant,40
 lidl,30
-baker,20
-apple,10
+baker,28
+apple,25

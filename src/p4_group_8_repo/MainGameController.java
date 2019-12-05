@@ -1,5 +1,7 @@
 package p4_group_8_repo;
 
+import java.io.FileNotFoundException;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -66,11 +68,21 @@ public class MainGameController extends Application{
 		        		score.setNumber(score.getPoints());
 		        	}
 		        	if (animal.getStop()) {
-		        		handleGameOver(true);
+		        		try {
+							handleGameOver(true);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		        	}
 		        	lives.updateLives();
 		        	if(lives.getGameOver()) {
-		        		handleGameOver(false);
+		        		try {
+							handleGameOver(false);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		        	}
 
 	        }
@@ -123,11 +135,12 @@ public class MainGameController extends Application{
 		
 	}
     
-	public void handleGameOver(boolean win) {
+	public void handleGameOver(boolean win) throws FileNotFoundException {
 		background.stopMusic();
 		stop();
 		background.stop();
-		mainApp.showGameOver(score.getPoints(),win);
+		boolean earnedHighscore = HighscoreManagerSingleton.getInstance().checkTopTen(score.getPoints());
+		mainApp.showGameOver(score.getPoints(),win,earnedHighscore);
 	}
 	
 	/**

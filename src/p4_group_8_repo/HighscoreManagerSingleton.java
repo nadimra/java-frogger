@@ -11,18 +11,25 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 
-public class HighscoreManager {
-    // An arraylist of the type "score" we will use to work with the scores inside the class
+public class HighscoreManagerSingleton {
+
+	private static HighscoreManagerSingleton SINGLE_INSTANCE = null;
+	
+	
     private ArrayList<Highscore> scores;
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
     private String fileName = "src/resources/highscores.txt";
 
+    private HighscoreManagerSingleton() {
+    	scores = new ArrayList<Highscore>();
+    }
 
-
-    public HighscoreManager() {
-        //initialising the scores-arraylist
-        scores = new ArrayList<Highscore>();
+    public static HighscoreManagerSingleton getInstance() {
+    	if(SINGLE_INSTANCE == null) {
+    		SINGLE_INSTANCE = new HighscoreManagerSingleton();
+    	}
+		return SINGLE_INSTANCE;
     }
     
     public ObservableList<Highscore> getScores() throws FileNotFoundException {
