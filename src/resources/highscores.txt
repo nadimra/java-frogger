@@ -1,0 +1,10 @@
+nad,120
+reece,80
+neve,70
+dOm,60
+meabh,50
+josh,50
+croissant,40
+lidl,30
+baker,20
+apple,10
