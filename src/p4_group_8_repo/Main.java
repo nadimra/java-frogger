@@ -2,6 +2,7 @@ package p4_group_8_repo;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -90,8 +91,9 @@ public class Main extends Application {
     
     /**
      * Initializes the root layout.
+     * @throws FileNotFoundException 
      */
-    public void showGame() {
+    public void showGame() throws FileNotFoundException {
             // Load root layout from fxml file.
         	game = new MainGameController();
         	game.setMainApp(this);

@@ -43,21 +43,26 @@ public class Level {
 			background.add(new Log("file:src/resources/log3.png", 150, 440, 500, 0.75));
 			*/
 			
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 0, 150 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 220, 150 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 440, 150 +8, 0.75));
+			// imagelink, imagexsize, imageysize, xpos, ypos, speed
+			//background.add(new Log("file:src/resources/log3.png", 150, 35, 0, 150 + 8, 0.75));
+			//background.add(new Log("file:src/resources/log3.png", 150, 35, 220, 150 + 8, 0.75));
+			//background.add(new Log("file:src/resources/log3.png", 150, 35, 440, 150 +8, 0.75));
 			
-			background.add(new Log("file:src/resources/logs.png", 35, 300, 0, 250 + 8, -2));
-			background.add(new Log("file:src/resources/logs.png", 35, 300, 400, 250 + 8, -2));
 			
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 50, 300 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 270, 300 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 490, 300 + 8, 0.75));
+			//background.add(LogFactory.getLog("LogBig", 0, 150, 0.75));
 			
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 50, 400 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 270, 400 + 8, 0.75));
-			background.add(new Log("file:src/resources/log3.png", 35, 150, 490, 400 + 8, 0.75));
+			/*
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 0, 250 + 8, -2));
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 400, 250 + 8, -2));
 			
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 50, 300 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 270, 300 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 490, 300 + 8, 0.75));
+			
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 50, 400 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 270, 400 + 8, 0.75));
+			background.add(new Log("file:src/resources/log3.png", 150, 35, 490, 400 + 8, 0.75));
+			*/
 		}
 		
 		/**

@@ -24,7 +24,8 @@ public class MainGameController extends Application{
 	AnimationTimer timer;
 	MyStage background;
 	Animal animal;
-	Level level;
+	//Level level;
+	LevelCreator level;
 	Score score;
 	LivesManager lives;
 	DisplayTimer displayTimer;
@@ -37,15 +38,17 @@ public class MainGameController extends Application{
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
+     * @throws FileNotFoundException 
      */
-    public void initialize() {
+    public void initialize() throws FileNotFoundException {
 	    background = new MyStage();
 	    scene  = new Scene(background,maxWidth,maxHeight);
 
 		BackgroundImage froggerback = new BackgroundImage("file:src/resources/background.png");	    
 		background.add(froggerback);
 
-		level = new Level(background);
+		//level = new Level(background);
+		level = new LevelCreator(background,1);
 		score = new Score(background);
 		lives = new LivesManager(background,3);
 		displayTimer = new DisplayTimer(background, 20);

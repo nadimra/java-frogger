@@ -1,5 +1,7 @@
 package p4_group_8_repo;
 
+import java.io.FileNotFoundException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -76,7 +78,7 @@ public class GameOverController {
 	}
 	
 	@FXML
-	private void onResetClick() {
+	private void onResetClick() throws FileNotFoundException {
 	    mainApp.showGame();
 
 	}

@@ -1,5 +1,7 @@
 package p4_group_8_repo;
 
+import java.io.FileNotFoundException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -8,7 +10,7 @@ public class MenuController {
 	private Main mainApp;
 	
 	@FXML
-	private void onPlayClick() {
+	private void onPlayClick() throws FileNotFoundException {
 	    mainApp.showGame();
 	}
 	

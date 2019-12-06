@@ -251,12 +251,8 @@ public class Animal extends Actor {
 	 * 
 	 */
 	private void handleLogCollision() {
-		if(getIntersectingObjects(Log.class).get(0).getLeft()) {
-			move(-2,0);
-		}
-		else {
-			move (.75,0);
-		}
+		move(getIntersectingObjects(Log.class).get(0).getSpeed(),0);
+
 	}
 	
 	/**
