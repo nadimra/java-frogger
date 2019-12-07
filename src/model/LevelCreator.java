@@ -17,7 +17,8 @@ public class LevelCreator {
 		  LogMedium,
 		  LogSmall,
 		  TruckBig,
-		  TruckSmall
+		  TruckSmall,
+		  EndBlock
 	}
     
 	MyStage background;
@@ -52,6 +53,12 @@ public class LevelCreator {
     private void convertRecords(List<List<String>> records) {
     	for(List<String> record : records) {
     		int laneNum = Integer.parseInt(record.get(0));
+    		if(laneNum == 2) {
+	    		ActorTypes actor = ActorTypes.valueOf(record.get(1));	
+	    		int numActors = Integer.parseInt(record.get(2));
+	    		new Lane(background,laneNum,actor,numActors);
+	    		System.out.println("testest end");
+    		}
     		
     		// These lanes have to have 6 parameters
     		if(laneNum >2 && laneNum < 9) {

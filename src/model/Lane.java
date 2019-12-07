@@ -25,17 +25,39 @@ public class Lane extends Actor {
 		populateLane();
 	}
 	
+	public Lane(MyStage background, int laneNum, ActorTypes typeOfActor, int numActors) {
+		this.background = background;
+		this.typeOfActor = typeOfActor;
+		this.numActors = numActors;	
+		calculateOffset();
+		populateLane();
+
+	}
+
 	private void populateLane() {
 		int shift = 0;
 		for(int i=1; i<= numActors; i++) {
 				if(typeOfActor == ActorTypes.LogBig || typeOfActor == ActorTypes.LogMedium || typeOfActor == ActorTypes.LogSmall) {
 					background.add(LogFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					shift = shift + offset;
 				}
 				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall) {
 					background.add(ObstacleFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					shift = shift + offset;
 				}
-				shift = shift + offset;
+				
+				if(typeOfActor == ActorTypes.EndBlock) {
+					shift = shift + offset;
+					background.add(new End(shift+ (i-1)*End.imgSize,End.yPos));
+					System.out.println("check");
+				}
+				
 		}
+	}
+	
+	
+	private void calculateOffset() {
+		offset = ((Main.maxWidth-(End.imgSize*numActors))/(numActors+1));
 	}
 
 	@Override

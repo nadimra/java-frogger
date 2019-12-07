@@ -4,6 +4,9 @@ import javafx.scene.image.Image;
 
 public class End extends Actor{
 	boolean activated = false;
+	public static final int imgSize = 60;
+	public static final int yPos = 96;
+	
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method st
@@ -12,11 +15,11 @@ public class End extends Actor{
 	public End(int x, int y) {
 		setX(x);
 		setY(y);
-		setImage(new Image("file:src/resources/End.png", 60, 60, true, true));
+		setImage(new Image("file:src/resources/End.png", imgSize, imgSize, true, true));
 	}
 	
 	public void setEnd() {
-		setImage(new Image("file:src/resources/FrogEnd.png", 60, 60, true, true));
+		setImage(new Image("file:src/resources/FrogEnd.png", imgSize, imgSize, true, true));
 		activated = true;
 	}
 	
@@ -24,5 +27,8 @@ public class End extends Actor{
 		return activated;
 	}
 	
+	public int getImageSize() {
+		return imgSize;
+	}
 
 }
