@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 
 import java.io.File;
@@ -6,6 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import controller.GameOverController;
+import controller.HelpMenuController;
+import controller.HighscoreController;
+import controller.HighscoreInputController;
+import controller.MainGameController;
+import controller.MenuController;
+import controller.PauseMenuController;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +26,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 
 /**
  * The object of this class puts everything together and displays the interface to the user.
@@ -72,7 +80,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Menu.fxml"));
+            loader.setLocation(Main.class.getResource("/view/Menu.fxml"));
             menuScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
@@ -119,7 +127,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("PauseMenu.fxml"));
+            loader.setLocation(Main.class.getResource("/view/PauseMenu.fxml"));
             pauseScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
@@ -144,7 +152,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("HelpMenu.fxml"));
+            loader.setLocation(Main.class.getResource("/view/HelpMenu.fxml"));
             helpScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
@@ -168,7 +176,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("GameOver.fxml"));
+            loader.setLocation(Main.class.getResource("/view/GameOver.fxml"));
             gameOverScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
@@ -194,7 +202,7 @@ public class Main extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Highscore.fxml"));
+            loader.setLocation(Main.class.getResource("/view/Highscore.fxml"));
             highscoreScreen = (AnchorPane) loader.load();
             
             // Show the scene containing the root layout.
@@ -215,7 +223,7 @@ public class Main extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("HighscoreInput.fxml"));
+            loader.setLocation(Main.class.getResource("/view/HighscoreInput.fxml"));
             AnchorPane highscoreInput = (AnchorPane) loader.load();
 
             // Create the dialog Stage.

@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,9 +9,16 @@ import java.util.Scanner;
 public class LevelCreator {
 
     private String fileName = "src/resources/";
-    private ArrayList<Lane> lanesCollection;
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    
+	enum ActorTypes {
+		  LogBig,
+		  LogMedium,
+		  LogSmall,
+		  TruckBig,
+		  TruckSmall
+	}
     
 	MyStage background;
 
@@ -49,11 +56,11 @@ public class LevelCreator {
     		// These lanes have to have 6 parameters
     		if(laneNum >2 && laneNum < 9) {
 	    		double speed = Double.parseDouble(record.get(1));
-	    		String actor = record.get(2);	
+	    		ActorTypes actor = ActorTypes.valueOf(record.get(2));	
 	    		int numActors = Integer.parseInt(record.get(3));
 	    		int xStartPos = Integer.parseInt(record.get(4));
 	    		int offset = Integer.parseInt(record.get(5));
-	    		Lane lane = new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
+	    		new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
     		}
 
     		if(laneNum > 9 && laneNum < 15) {
@@ -62,11 +69,11 @@ public class LevelCreator {
     			}
     			else {
     	    		double speed = Double.parseDouble(record.get(1));
-    	    		String actor = record.get(2);	
+    	    		ActorTypes actor =  ActorTypes.valueOf(record.get(2));	
     	    		int numActors = Integer.parseInt(record.get(3));
     	    		int xStartPos = Integer.parseInt(record.get(4));
     	    		int offset = Integer.parseInt(record.get(5));
-    	    		Lane lane = new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
+    	    		new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
     			}
     		}
     	}

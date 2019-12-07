@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
  
 /**
  * The object of this class displays the score to the GUI

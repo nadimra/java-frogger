@@ -2,17 +2,15 @@ package model;
 
 import javafx.scene.image.Image;
 
-public class LogBig extends Log {
+public class TruckSmall extends Truck{
+	private int xSize = 120;
+	private int ySize = 40;
+	private String imageLink = "file:src/resources/truck1";
 	
-	private int xSize = 178;
-	private int ySize = 35;
-	private String imageLink = "file:src/resources/log3.png";
-	
-	public LogBig(int xpos, int yposAssigned, double s) { 
+	public TruckSmall(int xpos, int yposAssigned, double s) { 
 		super(xpos, yposAssigned, s);
-		setImage(new Image(imageLink, xSize,ySize, false, true));
+		setImage(new Image(imageLink+setDirection(), xSize,ySize, false, true));
 		setPos(xpos,adjustPosY(yposAssigned));
-
 	}
 	
 	@Override
@@ -27,12 +25,4 @@ public class LogBig extends Log {
 	private int adjustPosY(int ypos) {
 		return yPos = ((Lane.LANE_SIZE)-ySize)/2+ypos;
 	}
-	
-	private void setPos(int xpos, int ypos) {
-		setX(xpos);
-		setY(ypos);		
-	}
-	
-	
-
 }

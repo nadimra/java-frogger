@@ -1,36 +1,40 @@
-package p4_group_8_repo;
+package model;
+
+import model.LevelCreator.ActorTypes;
 
 public class Lane extends Actor {
 	static final int LANE_SIZE = 50;
 	private int laneNum;
 	private double speed;
-	private String actorType;
+	private ActorTypes typeOfActor;
 	private int numActors;
 	private int xStartPos;
 	private int offset;
 	private MyStage background;
 	
-	public Lane(MyStage background, int laneNum, double speed, String actorType, int numActors, int xStartPos, int offset) {
+	
+	public Lane(MyStage background, int laneNum, double speed, ActorTypes typeOfActor, int numActors, int xStartPos, int offset) {
 		this.background = background;
 
 		this.laneNum = laneNum;
 		this.speed = speed;
-		this.actorType = actorType;
+		this.typeOfActor = typeOfActor;
 		this.numActors = numActors;
 		this.xStartPos = xStartPos;
 		this.offset = offset;
-		System.out.println("Lanenum: " + laneNum + ", speed: "+speed+", type: " + actorType + ", num actors: " + numActors);
 		populateLane();
 	}
 	
 	private void populateLane() {
 		int shift = 0;
 		for(int i=1; i<= numActors; i++) {
-			if(actorType.equals("LogBig")) {
-				background.add(LogFactory.getLog("LogBig", xStartPos + shift, laneNum*LANE_SIZE, speed));
-				System.out.println("created log");
+				if(typeOfActor == ActorTypes.LogBig || typeOfActor == ActorTypes.LogMedium || typeOfActor == ActorTypes.LogSmall) {
+					background.add(LogFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+				}
+				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall) {
+					background.add(ObstacleFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+				}
 				shift = shift + offset;
-			}
 		}
 	}
 

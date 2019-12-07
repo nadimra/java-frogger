@@ -2,13 +2,13 @@ package model;
 
 import javafx.scene.image.Image;
 
-public class LogBig extends Log {
+public class LogSmall extends Log {
 	
-	private int xSize = 178;
+	private int xSize = 84;
 	private int ySize = 35;
-	private String imageLink = "file:src/resources/log3.png";
+	private String imageLink = "file:src/resources/log2.png";
 	
-	public LogBig(int xpos, int yposAssigned, double s) { 
+	public LogSmall(int xpos, int yposAssigned, double s) { 
 		super(xpos, yposAssigned, s);
 		setImage(new Image(imageLink, xSize,ySize, false, true));
 		setPos(xpos,adjustPosY(yposAssigned));
@@ -30,9 +30,8 @@ public class LogBig extends Log {
 	
 	private void setPos(int xpos, int ypos) {
 		setX(xpos);
-		setY(ypos);		
+		setY(ypos);
 	}
-	
-	
 
+	
 }

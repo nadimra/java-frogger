@@ -1,10 +1,11 @@
-package p4_group_8_repo;
+package controller;
 
 import java.io.FileNotFoundException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.Main;
 
 public class PauseMenuController {
 

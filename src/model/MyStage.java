@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 import java.io.File;
 

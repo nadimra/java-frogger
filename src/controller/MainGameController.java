@@ -1,18 +1,23 @@
-package p4_group_8_repo;
+package controller;
 
 import java.io.FileNotFoundException;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.Animal;
+import model.BackgroundImage;
+import model.DisplayTimer;
+import model.HighscoreManagerSingleton;
+import model.LevelCreator;
+import model.LivesManager;
+import model.Main;
+import model.MyStage;
+import model.Score;
 
 
 
@@ -187,16 +192,16 @@ public class MainGameController extends Application{
 						switch(keyPress) {
 							case W: 
 								score.setChangeScore(false);
-								animal.handleVerticalMovement(-animal.getMoveX(), animal.imgW1);	 
+								animal.handleVerticalMovement(-animal.getMoveX(),  animal.getImage("W1"));	 
 								break;
 							case A:       	
-								animal.handleHorizontalMovement(-animal.getMoveY(), animal.imgA1);
+								animal.handleHorizontalMovement(-animal.getMoveY(), animal.getImage("A1"));
 								break;
 							case S:
-								animal.handleVerticalMovement(animal.getMoveY(), animal.imgS1);	 
+								animal.handleVerticalMovement(animal.getMoveY(),  animal.getImage("S1"));	 
 								break;
 							case D:	            	
-								animal.handleHorizontalMovement(animal.getMoveX(), animal.imgD1);
+								animal.handleHorizontalMovement(animal.getMoveX(),  animal.getImage("D1"));
 								break;
 						}
 					}
@@ -204,16 +209,16 @@ public class MainGameController extends Application{
 						// Set sprite to the 'jumping' directional sprite
 						switch(keyPress) {
 							case W: 
-								animal.handleVerticalMovement(-animal.getMoveY(), animal.imgW2);	 
+								animal.handleVerticalMovement(-animal.getMoveY(), animal.getImage("W2"));	 
 								break;
 							case A: 
-								animal.handleHorizontalMovement(-animal.getMoveX(), animal.imgA2);      
+								animal.handleHorizontalMovement(-animal.getMoveX(),  animal.getImage("A2"));      
 					            break;
 							case S:
-								animal.handleVerticalMovement(animal.getMoveY(),animal.imgS2);	 
+								animal.handleVerticalMovement(animal.getMoveY(), animal.getImage("S2"));	 
 					            break;
 							case D:
-								animal.handleHorizontalMovement(animal.getMoveX(), animal.imgD2);   
+								animal.handleHorizontalMovement(animal.getMoveX(),  animal.getImage("D2"));   
 					            break;
 						}
 					}
@@ -236,20 +241,20 @@ public class MainGameController extends Application{
 					switch(keyPress) {
 						case W:
 							double animalW = animal.getW();
-							if (animal.getY() < animal.w) {
+							if (animal.getY() < animalW) {
 								score.updatePoints(10);
 								animal.setW(animal.getY());
 							}
-							animal.handleVerticalMovement(-animal.movement, animal.imgW1);   
+							animal.handleVerticalMovement(-animal.getMoveY(), animal.getImage("W1"));   
 					        break;         
 						case A:	            	
-							animal.handleHorizontalMovement(-animal.movementX, animal.imgA1);   
+							animal.handleHorizontalMovement(-animal.getMoveX(), animal.getImage("A1"));   
 					         break;
 						case S:
-							animal.handleVerticalMovement(animal.movement, animal.imgS1);  
+							animal.handleVerticalMovement(animal.getMoveY(), animal.getImage("S1"));  
 					         break;
 						case D:            	
-							animal.handleHorizontalMovement(animal.movementX, animal.imgD1);
+							animal.handleHorizontalMovement(animal.getMoveX(), animal.getImage("D1"));
 					         break;
 					}
 				}

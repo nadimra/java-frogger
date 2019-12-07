@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 import javafx.scene.image.Image;
 
@@ -17,10 +17,6 @@ public abstract class Log extends Actor {
 		setX(xpos);
 		setY(ypos);
 		speed = s;
-	}
-	
-	public boolean getLeft() {
-		return speed < 0;
 	}
 	
 	public int getXPos() {

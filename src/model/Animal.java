@@ -1,4 +1,4 @@
-package p4_group_8_repo;
+package model;
 
 import java.util.ArrayList;
 
@@ -326,6 +326,29 @@ public class Animal extends Actor {
 		w = setW;
 	}
 	
+	public Image getImage(String imageName) {
+		switch(imageName) {
+		  case "W1":
+			return imgW1;
+		  case "W2":
+			return imgW2;
+		  case "A1":
+			return imgA1;
+		case "A2":
+			return imgA2;
+		case "S1":
+			return imgS1;
+		  case "S2":
+			return imgS2;
+		  case "D1":
+			return imgD1;
+		  case "D2":
+			return imgD2;
+		}
+		return null;
+
+	}
+		
 
 	
 }
