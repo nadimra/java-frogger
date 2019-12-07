@@ -222,7 +222,7 @@ public class Animal extends Actor {
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			handleLogCollision();
 		}
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+		else if (getIntersectingObjects(NormalTurtle.class).size() >= 1 && !noMove) {
 			handleTurtleCollision();
 		}
 		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {

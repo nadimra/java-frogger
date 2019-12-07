@@ -18,7 +18,9 @@ public class LevelCreator {
 		  LogSmall,
 		  TruckBig,
 		  TruckSmall,
-		  EndBlock
+		  EndBlock,
+		  WetTurtle,
+		  NormalTurtle
 	}
     
 	MyStage background;

@@ -49,8 +49,14 @@ public class Lane extends Actor {
 				if(typeOfActor == ActorTypes.EndBlock) {
 					shift = shift + offset;
 					background.add(new End(shift+ (i-1)*End.imgSize,End.yPos));
-					System.out.println("check");
 				}
+				
+				if(typeOfActor == ActorTypes.NormalTurtle || typeOfActor == ActorTypes.WetTurtle) {
+					background.add(TurtleFactory.getTurtle(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					shift = shift + offset;
+				}
+				
+
 				
 		}
 	}

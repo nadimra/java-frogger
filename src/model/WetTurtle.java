@@ -2,14 +2,13 @@ package model;
 
 import javafx.scene.image.Image;
 
-public class WetTurtle extends Actor{
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
+public class WetTurtle extends Turtle{
+
+	private int xSize = 120;
+	private int ySize = 50; 
+	
 	Image turtle4;
-	private int speed;
-	int i = 1;
-	boolean bool = true;
+
 	boolean sunk = false;
 	@Override
 	public void act(long now) {
@@ -37,14 +36,12 @@ public class WetTurtle extends Actor{
 		if (getX() < -75 && speed<0)
 			setX(600);
 	}
-	public WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/resources/TurtleAnimation1.png", w, h, false, true);
-		turtle2 = new Image("file:src/resources/TurtleAnimation2Wet.png", w, h, false, true);
-		turtle3 = new Image("file:src/resources/TurtleAnimation3Wet.png", w, h, false, true);
-		turtle4 = new Image("file:src/resources/TurtleAnimation4Wet.png", w, h, false, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
+	public WetTurtle(int xpos, int ypos, double s) {
+		super(xpos,ypos,s);
+		turtle1 = new Image("file:src/resources/TurtleAnimation1.png",xSize, ySize,false, true);
+		turtle2 = new Image("file:src/resources/TurtleAnimation2Wet.png", xSize, ySize, false, true);
+		turtle3 = new Image("file:src/resources/TurtleAnimation3Wet.png", xSize, ySize, false, true);
+		turtle4 = new Image("file:src/resources/TurtleAnimation4Wet.png", xSize, ySize, false, true);
 		setImage(turtle2);
 	}
 	public boolean isSunk() {
