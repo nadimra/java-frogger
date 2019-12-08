@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import model.LevelCreator.ActorTypes;
 
 public class Lane extends Actor {
@@ -11,9 +13,13 @@ public class Lane extends Actor {
 	private int xStartPos;
 	private int offset;
 	private MyStage background;
+	private ArrayList<Actor> itemCollection;
 	
 	
 	public Lane(MyStage background, int laneNum, double speed, ActorTypes typeOfActor, int numActors, int xStartPos, int offset) {
+		
+		itemCollection = new ArrayList<Actor>();
+
 		this.background = background;
 
 		this.laneNum = laneNum;
@@ -22,10 +28,15 @@ public class Lane extends Actor {
 		this.numActors = numActors;
 		this.xStartPos = xStartPos;
 		this.offset = offset;
+		
 		populateLane();
+		
+		
 	}
 	
 	public Lane(MyStage background, int laneNum, ActorTypes typeOfActor, int numActors) {
+		itemCollection = new ArrayList<Actor>();
+		
 		this.background = background;
 		this.typeOfActor = typeOfActor;
 		this.numActors = numActors;	
@@ -38,21 +49,29 @@ public class Lane extends Actor {
 		int shift = 0;
 		for(int i=1; i<= numActors; i++) {
 				if(typeOfActor == ActorTypes.LogBig || typeOfActor == ActorTypes.LogMedium || typeOfActor == ActorTypes.LogSmall) {
-					background.add(LogFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					Actor log = LogFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
+					itemCollection.add(log);
+					background.add(log);
 					shift = shift + offset;
 				}
 				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall) {
-					background.add(ObstacleFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					Actor obs = ObstacleFactory.getTruck(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
+					itemCollection.add(obs);
+					background.add(obs);
 					shift = shift + offset;
 				}
 				
 				if(typeOfActor == ActorTypes.EndBlock) {
 					shift = shift + offset;
-					background.add(new End(shift+ (i-1)*End.imgSize,End.yPos));
+					Actor end = new End(shift+ (i-1)*End.imgSize,End.yPos);
+					itemCollection.add(end);
+					background.add(end);
 				}
 				
 				if(typeOfActor == ActorTypes.NormalTurtle || typeOfActor == ActorTypes.WetTurtle) {
-					background.add(TurtleFactory.getTurtle(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed));
+					Actor turtle = TurtleFactory.getTurtle(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
+					itemCollection.add(turtle);
+					background.add(turtle);
 					shift = shift + offset;
 				}
 				
@@ -61,6 +80,12 @@ public class Lane extends Actor {
 		}
 	}
 	
+	public void clearLane() {
+		for(Actor item: itemCollection) {
+			background.remove(item);
+		}
+
+	}
 	
 	private void calculateOffset() {
 		offset = ((Main.maxWidth-(End.imgSize*numActors))/(numActors+1));

@@ -6,11 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+
 public class LevelCreator {
 
     private String fileName = "src/resources/";
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    
+    private ArrayList<Lane> lanesCollection;
     
 	enum ActorTypes {
 		  LogBig,
@@ -24,14 +29,17 @@ public class LevelCreator {
 	}
     
 	MyStage background;
+	private int numEnds;
 
     public LevelCreator(MyStage background, int levelNum) throws FileNotFoundException {
+    	lanesCollection = new ArrayList<Lane>();
 		this.background = background;
     	loadLevelFile(levelNum);
     }
     
-    private void loadLevelFile(int levelNum) throws FileNotFoundException {
-    	
+    public void loadLevelFile(int levelNum) throws FileNotFoundException {
+    	//clearLevel();
+    	System.out.println("test" + levelNum);
     	List<List<String>> records = new ArrayList<>();
     	try (Scanner scanner = new Scanner(new File(fileName + "level" + levelNum + ".txt"));) {
     	    while (scanner.hasNextLine()) {
@@ -58,8 +66,8 @@ public class LevelCreator {
     		if(laneNum == 2) {
 	    		ActorTypes actor = ActorTypes.valueOf(record.get(1));	
 	    		int numActors = Integer.parseInt(record.get(2));
-	    		new Lane(background,laneNum,actor,numActors);
-	    		System.out.println("testest end");
+	    		numEnds = numActors;
+	    		lanesCollection.add(new Lane(background,laneNum,actor,numActors));
     		}
     		
     		// These lanes have to have 6 parameters
@@ -69,7 +77,7 @@ public class LevelCreator {
 	    		int numActors = Integer.parseInt(record.get(3));
 	    		int xStartPos = Integer.parseInt(record.get(4));
 	    		int offset = Integer.parseInt(record.get(5));
-	    		new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
+	    		lanesCollection.add(new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset));
     		}
 
     		if(laneNum > 9 && laneNum < 15) {
@@ -82,11 +90,21 @@ public class LevelCreator {
     	    		int numActors = Integer.parseInt(record.get(3));
     	    		int xStartPos = Integer.parseInt(record.get(4));
     	    		int offset = Integer.parseInt(record.get(5));
-    	    		new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset);
+    	    		lanesCollection.add(new Lane(background,laneNum,speed,actor,numActors,xStartPos,offset));
     			}
     		}
     	}
     }
-
+    
+    
+    public int getNumEnds() {
+    	return numEnds;
+    }
+    
+    public void clearLevel() {
+    	for(Lane lane:lanesCollection) {
+    		lane.clearLane();
+    	}
+    }
 
 }

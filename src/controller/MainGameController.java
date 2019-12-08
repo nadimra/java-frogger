@@ -14,6 +14,7 @@ import model.BackgroundImage;
 import model.DisplayTimer;
 import model.HighscoreManagerSingleton;
 import model.LevelCreator;
+import model.LevelManager;
 import model.LivesManager;
 import model.Main;
 import model.MyStage;
@@ -30,7 +31,7 @@ public class MainGameController extends Application{
 	MyStage background;
 	Animal animal;
 	//Level level;
-	LevelCreator level;
+	LevelManager levelManager;
 	Score score;
 	LivesManager lives;
 	DisplayTimer displayTimer;
@@ -53,7 +54,7 @@ public class MainGameController extends Application{
 		background.add(froggerback);
 
 		//level = new Level(background);
-		level = new LevelCreator(background,1);
+		levelManager = new LevelManager(background);
 		score = new Score(background);
 		lives = new LivesManager(background,3);
 		displayTimer = new DisplayTimer(background, 20);
@@ -79,18 +80,31 @@ public class MainGameController extends Application{
 
     		@Override
 	        public void handle(long now) {
+    			
+    				// Continiously check and update score
 		        	if (score.updateScore()) {
 		        		score.setNumber(score.getPoints());
 		        	}
+		        	
+    				// Check if player has completed the level
 		        	if (animal.getStop()) {
 		        		try {
-							handleGameOver(true);
+		        			animal.setStop();
+		        			levelManager.getNextLevel();
+		        			background.remove(animal);
+		        			background.add(animal);
+
+							//handleGameOver(true);
 						} catch (FileNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 		        	}
+		        	
+		        	// Continously check lives and update 
 		        	lives.updateLives();
+		        	
+		        	// Check if lives all gone
 		        	if(lives.getGameOver()) {
 		        		try {
 							handleGameOver(false);
@@ -99,6 +113,8 @@ public class MainGameController extends Application{
 							e.printStackTrace();
 						}
 		        	}
+		        	
+		        	// Check if timer has run out
 		        	if(displayTimer.getTimesUp()) {
 		        		try {
 							handleGameOver(false);
@@ -107,6 +123,8 @@ public class MainGameController extends Application{
 							e.printStackTrace();
 						}
 		        	}
+		        	
+		        	// Update timer
 		        	if (displayTimer.getLastTime() != 0) {
 		                 if (now > displayTimer.getLastTime() + 1_000_000_000) {
 		                     displayTimer.incrementSeconds();
@@ -119,6 +137,29 @@ public class MainGameController extends Application{
 
 	        }
     	};
+	}
+	
+	
+	/**
+	 * This method is called whenever the game is stopped, so it will need to stop updating certain objects
+	 * 
+	 */
+    public void stop() {
+        timer.stop();
+    }
+
+    public Scene getScene() {
+    	return scene;
+    }
+
+	public void setMainApp(Main mainApp) {
+		this.mainApp = mainApp;
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
@@ -142,28 +183,6 @@ public class MainGameController extends Application{
 	public void continueGame() {
 		background.start();
 		timer.start();
-	}
-	
-	/**
-	 * This method is called whenever the game is stopped, so it will need to stop updating certain objects
-	 * 
-	 */
-    public void stop() {
-        timer.stop();
-    }
-
-    public Scene getScene() {
-    	return scene;
-    }
-
-	public void setMainApp(Main mainApp) {
-		this.mainApp = mainApp;
-	}
-	
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
 	}
     
 	public void handleGameOver(boolean win) throws FileNotFoundException {
