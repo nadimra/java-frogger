@@ -25,6 +25,8 @@ import model.Score;
 public class MainGameController extends Application{
     static final int maxWidth = 600;
     static final int maxHeight = 800;
+    static final int levelTime = 60;
+    
     Scene scene;
     
 	AnimationTimer timer;
@@ -57,7 +59,7 @@ public class MainGameController extends Application{
 		levelManager = new LevelManager(background);
 		score = new Score(background);
 		lives = new LivesManager(background,3);
-		displayTimer = new DisplayTimer(background, 20);
+		displayTimer = new DisplayTimer(background, levelTime);
 
 		animal = new Animal("file:src/resources/froggerUp.png",score,lives);
 		background.add(animal);
@@ -89,12 +91,13 @@ public class MainGameController extends Application{
     				// Check if player has completed the level
 		        	if (animal.getStop()) {
 		        		try {
-		        			animal.setStop();
-		        			levelManager.getNextLevel();
-		        			background.remove(animal);
-		        			background.add(animal);
+		        			if(levelManager.getCurrentLevel() == levelManager.MAX_LEVELS) {
+		        				handleGameOver(true);
+		        			}
+		        			else {
+		        				handleNextLevel();
+		        			}
 
-							//handleGameOver(true);
 						} catch (FileNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -134,6 +137,7 @@ public class MainGameController extends Application{
 	                     displayTimer.setLastTime(now);
 
 		            }
+		        	
 
 	        }
     	};
@@ -161,18 +165,6 @@ public class MainGameController extends Application{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	/**
-	 * This method manages the start of the game.
-	 * 
-	 */
-	public void startGame() {
-		score.setNumber(0);
-		background.playMusic();
-    	onUpdate();
-        timer.start();
-    }
 
 	public void pauseGame() {
 		background.stop();
@@ -191,6 +183,35 @@ public class MainGameController extends Application{
 		background.stop();
 		boolean earnedHighscore = HighscoreManagerSingleton.getInstance().checkTopTen(score.getPoints());
 		mainApp.showGameOver(score.getPoints(),win,earnedHighscore);
+	}
+	
+	
+	/**
+	 * This method manages the start of the game.
+	 * @throws FileNotFoundException 
+	 * 
+	 */
+	public void startGame() throws FileNotFoundException {
+		score.setNumber(0);
+		background.playMusic();
+		levelManager.getNextLevel();
+		displayTimer.resetTimer();
+		animal.setNumEnds(levelManager.getNumEnds());
+		background.remove(animal);
+		background.add(animal);
+    	onUpdate();
+        timer.start();
+		mainApp.showLevelIntro(levelManager.getCurrentLevel(), 100);
+    }
+	
+	public void handleNextLevel() throws FileNotFoundException {
+		animal.setStop();
+		levelManager.getNextLevel();
+		displayTimer.resetTimer();
+		animal.setNumEnds(levelManager.getNumEnds());
+		background.remove(animal);
+		background.add(animal);
+        mainApp.showLevelIntro(levelManager.getCurrentLevel(), 100);
 	}
 	
 	/**

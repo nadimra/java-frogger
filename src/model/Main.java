@@ -10,10 +10,12 @@ import controller.GameOverController;
 import controller.HelpMenuController;
 import controller.HighscoreController;
 import controller.HighscoreInputController;
+import controller.LevelIntroController;
 import controller.MainGameController;
 import controller.MenuController;
 import controller.PauseMenuController;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -52,6 +54,7 @@ public class Main extends Application {
     private AnchorPane pauseScreen;
     private AnchorPane gameOverScreen;
     private AnchorPane highscoreScreen;
+	private AnchorPane levelIntroScreen;
 
 
 
@@ -246,6 +249,41 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    /**
+     * Initializes the root layout.
+     */
+    public void showLevelIntro(int levelNum, int highscore) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("/view/LevelIntro.fxml"));
+            AnchorPane levelIntro = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Level Overview");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(levelIntro);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            LevelIntroController controller = loader.getController();
+            controller.setDialogStage(dialogStage,levelNum,highscore);
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(e -> dialogStage.hide());
+
+            dialogStage.show();
+            delay.play();
+            
+            // Show the dialog and wait until the user closes it
+
+            
+        } catch (IOException e) {
         }
     }
     

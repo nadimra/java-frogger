@@ -31,15 +31,13 @@ public class LevelCreator {
 	MyStage background;
 	private int numEnds;
 
-    public LevelCreator(MyStage background, int levelNum) throws FileNotFoundException {
+    public LevelCreator(MyStage background) throws FileNotFoundException {
     	lanesCollection = new ArrayList<Lane>();
 		this.background = background;
-    	loadLevelFile(levelNum);
     }
     
     public void loadLevelFile(int levelNum) throws FileNotFoundException {
     	//clearLevel();
-    	System.out.println("test" + levelNum);
     	List<List<String>> records = new ArrayList<>();
     	try (Scanner scanner = new Scanner(new File(fileName + "level" + levelNum + ".txt"));) {
     	    while (scanner.hasNextLine()) {
@@ -94,6 +92,7 @@ public class LevelCreator {
     			}
     		}
     	}
+    	
     }
     
     

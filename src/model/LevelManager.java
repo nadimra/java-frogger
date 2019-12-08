@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 public class LevelManager {
 	LevelCreator level;
 	private int currentLevel;
-	private static final int MAX_LEVELS = 2;
+	public static final int MAX_LEVELS = 2;
 
 	public LevelManager(MyStage background) throws FileNotFoundException {
-		currentLevel = 1;
-		level = new LevelCreator(background,currentLevel);
+		currentLevel = 0;
+		level = new LevelCreator(background);
 	}
 	
 	public void getNextLevel() throws FileNotFoundException {
@@ -18,5 +18,13 @@ public class LevelManager {
 			level.clearLevel();
 			level.loadLevelFile(currentLevel);
 		}
+	}
+	
+	public int getCurrentLevel() {
+		return currentLevel;
+	}
+	
+	public int getNumEnds() {
+		return level.getNumEnds();
 	}
 }
