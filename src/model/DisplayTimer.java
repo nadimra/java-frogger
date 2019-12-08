@@ -75,4 +75,12 @@ public class DisplayTimer {
     public boolean getTimesUp() {
     	return timesUp;
     }
+    
+    public void resetTimer() {
+    	seconds = 0;
+    }
+    
+    public int getSeconds() {
+    	return seconds;
+    }
 }

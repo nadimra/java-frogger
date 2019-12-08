@@ -48,6 +48,7 @@ public class Animal extends Actor {
 	double w = 800;
 	ArrayList<End> inter = new ArrayList<End>();
 	private boolean updateDeath;
+	private int numEnds;
 	
 
 	/**
@@ -131,11 +132,19 @@ public class Animal extends Actor {
 	 * 
 	 */
 	public boolean getStop() {
-		return end==1;
+		return end==getNumEnds();
 	}
 	
 	public void setStop() {
 		end=0;
+	}
+	
+	public void setNumEnds(int n) {
+		numEnds = n;
+	}
+	
+	public int getNumEnds() {
+		return numEnds;
 	}
 	
 	/**
