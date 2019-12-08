@@ -2,6 +2,7 @@ package controller;
 
 import java.io.FileNotFoundException;
 
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -11,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.Animal;
 import model.BackgroundImage;
+import model.CommandUp;
 import model.DisplayTimer;
 import model.HighscoreManagerSingleton;
 import model.LevelCreator;
@@ -18,7 +20,12 @@ import model.LevelManager;
 import model.LivesManager;
 import model.Main;
 import model.MyStage;
+import model.Options;
 import model.Score;
+import model.Command;
+import model.CommandDown;
+import model.CommandLeft;
+import model.CommandRight;
 
 
 
@@ -38,6 +45,11 @@ public class MainGameController extends Application{
 	LivesManager lives;
 	DisplayTimer displayTimer;
 
+	Command controlUp;
+	Command controlDown;
+	Command controlLeft;
+	Command controlRight;
+	Options options;
 	
 	
 	private Main mainApp;
@@ -62,6 +74,13 @@ public class MainGameController extends Application{
 		displayTimer = new DisplayTimer(background, levelTime);
 
 		animal = new Animal("file:src/resources/froggerUp.png",score,lives);
+		
+		controlUp = new CommandUp(animal,KeyCode.W);
+		controlDown = new CommandDown(animal, KeyCode.S);
+		controlLeft = new CommandLeft(animal, KeyCode.A);
+		controlRight = new CommandRight(animal, KeyCode.D);
+		options = new Options(controlUp,controlDown, controlLeft,controlRight);
+
 		background.add(animal);
 		background.start();
 
@@ -229,43 +248,38 @@ public class MainGameController extends Application{
 				else {
 					// Set sprite back to the normal directional sprite
 					if (animal.getSecondAnimation()) {
-						switch(keyPress) {
-							case W: 
+						if(keyPress == options.getUpKey()) {
 								score.setChangeScore(false);
-								animal.handleVerticalMovement(-animal.getMoveX(),  animal.getImage("W1"));	 
-								break;
-							case A:       	
-								animal.handleHorizontalMovement(-animal.getMoveY(), animal.getImage("A1"));
-								break;
-							case S:
-								animal.handleVerticalMovement(animal.getMoveY(),  animal.getImage("S1"));	 
-								break;
-							case D:	            	
-								animal.handleHorizontalMovement(animal.getMoveX(),  animal.getImage("D1"));
-								break;
+								options.pressUp("W1");
+						}
+						if(keyPress == options.getLeftKey()) {
+								options.pressLeft("A1");
+						}
+						if(keyPress == options.getDownKey()) {
+								options.pressDown("S1");
+						}		
+						if(keyPress == options.getRightKey()) {
+								options.pressRight("D1");
 						}
 					}
 					else {
 						// Set sprite to the 'jumping' directional sprite
-						switch(keyPress) {
-							case W: 
-								animal.handleVerticalMovement(-animal.getMoveY(), animal.getImage("W2"));	 
-								break;
-							case A: 
-								animal.handleHorizontalMovement(-animal.getMoveX(),  animal.getImage("A2"));      
-					            break;
-							case S:
-								animal.handleVerticalMovement(animal.getMoveY(), animal.getImage("S2"));	 
-					            break;
-							case D:
-								animal.handleHorizontalMovement(animal.getMoveX(),  animal.getImage("D2"));   
-					            break;
+						if(keyPress == options.getUpKey()) {
+								options.pressUp("W2");
+						}
+						if(keyPress == options.getLeftKey()) {
+								options.pressLeft("A2");
+						}
+						if(keyPress == options.getDownKey()) {
+								options.pressDown("S2");
+						}
+						if(keyPress == options.getRightKey()) {
+								options.pressRight("D2");
 						}
 					}
 				}
-			}
-				
-		});	
+				}
+			});	
 	}
 	
 	/**
@@ -278,27 +292,26 @@ public class MainGameController extends Application{
 				KeyCode keyPress = event.getCode();
 				if (animal.getNoMove()) {} // Don't do anything
 				else {
-					switch(keyPress) {
-						case W:
-							double animalW = animal.getW();
-							if (animal.getY() < animalW) {
-								score.updatePoints(10);
-								animal.setW(animal.getY());
-							}
-							animal.handleVerticalMovement(-animal.getMoveY(), animal.getImage("W1"));   
-					        break;         
-						case A:	            	
-							animal.handleHorizontalMovement(-animal.getMoveX(), animal.getImage("A1"));   
-					         break;
-						case S:
-							animal.handleVerticalMovement(animal.getMoveY(), animal.getImage("S1"));  
-					         break;
-						case D:            	
-							animal.handleHorizontalMovement(animal.getMoveX(), animal.getImage("D1"));
-					         break;
+					if(keyPress == options.getUpKey()) {
+						double animalW = animal.getW();
+						if (animal.getY() < animalW) {
+							score.updatePoints(10);
+							animal.setW(animal.getY());
+						}
+						options.pressUp("W1");	
+					}
+					if(keyPress == options.getLeftKey()) {
+						options.pressLeft("A1");
+					}
+					if(keyPress == options.getDownKey()) {
+						options.pressDown("S1");
+					}
+					if(keyPress == options.getRightKey()) {
+						options.pressRight("D1");
 					}
 				}
 			}
+			
 		});
 	}
 	
