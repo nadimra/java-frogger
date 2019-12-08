@@ -102,7 +102,11 @@ public class LevelCreator {
     
     public void clearLevel() {
     	for(Lane lane:lanesCollection) {
-    		lane.clearLane();
+    		ArrayList<Actor> itemCollection = lane.getItemCollection();
+    		for(Actor item: itemCollection) {
+    			background.remove(item);
+    		}
+
     	}
     }
 

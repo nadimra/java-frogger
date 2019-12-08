@@ -87,6 +87,10 @@ public class Lane extends Actor {
 
 	}
 	
+	public ArrayList<Actor> getItemCollection(){
+		return itemCollection;
+	}
+	
 	private void calculateOffset() {
 		offset = ((Main.maxWidth-(End.imgSize*numActors))/(numActors+1));
 	}
