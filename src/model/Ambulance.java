@@ -75,7 +75,7 @@ public class Ambulance extends Obstacle {
 	public void createDropHeart() {
 		//Check if the heart not dropped yet
 		if(!getDroppedHeart()) {
-			if((getX()<(Main.maxWidth)-xSize) && (getX()>-xSize)) {
+			if((getX()<(Main.maxWidth)) && (getX()>0)) {
 				heartActor = new DroppedHeart(getX(),yPos);
 				//Add the item to the lane
 				lane.addLaneItem(heartActor);

@@ -33,7 +33,6 @@ public class LivesManager {
         for (Heart heart : livesCollection) { 		      
             background.add(heart);
         }
-        setUpdateLives(false);
     }
     
     public void createLives() {
@@ -46,13 +45,17 @@ public class LivesManager {
     	return updateLives;
     }
     
+    public void setUpdateLives(boolean val) {
+    	updateLives = val;
+    }
+    
     public void addLives() {
+    	
     	if(numLives<originalLives){
     		numLives = numLives + 1;
     	
 	    	Heart last = livesCollection.get(livesCollection.size() - (originalLives - numLives)-1); 
 	    	last.setAlive();
-	    	setUpdateLives(true);
     	}	
     	
     }
@@ -64,20 +67,9 @@ public class LivesManager {
     	if(numLives == 0) {
 	    	gameOver = true;
     	}
-    	setUpdateLives(true);
     }
     
-    public void setUpdateLives(boolean set) {
-    	updateLives = set;
-    }
-    
-    public boolean updateLives() {
-    	if(updateLives) {
-    		updateLives = false;
-    		return true;
-    	}
-    	return false;
-    }
+
     
     public boolean getGameOver() {
     	return gameOver;

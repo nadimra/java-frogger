@@ -349,6 +349,10 @@ public class Animal extends Actor {
 		return collideDroppedHeart;
 	}
 	
+	public void setCollidedDroppedHeart(boolean val) {
+		collideDroppedHeart = val;
+	}
+	
 	public DroppedHeart getHeartCollision() {
 		return heartCollision;
 	}

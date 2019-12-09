@@ -124,7 +124,7 @@ public class MainGameController extends Application{
 		        	}
 		        	
 		        	// Continously check lives and update 
-		        	lives.updateLives();
+		        	//lives.updateLives();
 		        	
 		        	// Check if lives all gone
 		        	if(lives.getGameOver()) {
@@ -161,8 +161,14 @@ public class MainGameController extends Application{
 		        		levelManager.updateAdditions();
 		        	}
 		        	if(animal.getCollidedDroppedHeart()) {
-		        		background.remove(animal.getHeartCollision());
-		        		lives.addLives();
+		        		lives.setUpdateLives(true);
+		        		if(lives.getUpdateLives()) {
+		        			animal.setCollidedDroppedHeart(false);
+		        			background.remove(animal.getHeartCollision());
+		        			lives.addLives();
+		        			lives.setUpdateLives(false);
+		        		}
+		        		
 		        	}
 
 	        }
