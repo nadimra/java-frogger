@@ -48,4 +48,8 @@ public abstract class Obstacle extends Actor {
 		return "Right.png";
 	}
 
+	protected void setPos(int xpos, int ypos) {
+		setX(xpos);
+		setY(ypos);		
+	}
 }

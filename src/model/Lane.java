@@ -14,6 +14,8 @@ public class Lane extends Actor {
 	private int offset;
 	private MyStage background;
 	private ArrayList<Actor> itemCollection;
+	private ArrayList<Ambulance> ambulanceCollection = new ArrayList<>();
+
 	
 	
 	public Lane(MyStage background, int laneNum, double speed, ActorTypes typeOfActor, int numActors, int xStartPos, int offset) {
@@ -54,11 +56,14 @@ public class Lane extends Actor {
 					background.add(log);
 					shift = shift + offset;
 				}
-				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall) {
+				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall || typeOfActor == ActorTypes.Ambulance) {
 					Actor obs = ObstacleFactory.getTruck(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
 					itemCollection.add(obs);
 					background.add(obs);
 					shift = shift + offset;
+					if(typeOfActor == ActorTypes.Ambulance) {
+						addObserver((Ambulance) obs);
+					}
 				}
 				
 				if(typeOfActor == ActorTypes.EndBlock) {
@@ -100,5 +105,15 @@ public class Lane extends Actor {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void addObserver(Ambulance ambulance) {
+		ambulanceCollection.add(ambulance);
+	}
+	
+	public void removeObserver(Ambulance ambulance) {
+		ambulanceCollection.remove(ambulance);
+	}
+	
+	
 	
 }

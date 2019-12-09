@@ -6,9 +6,6 @@ public class Truck extends Obstacle {
 		super(xpos, ypos, s);
 	}
 	
-	protected void setPos(int xpos, int ypos) {
-		setX(xpos);
-		setY(ypos);		
-	}
+
 
 }

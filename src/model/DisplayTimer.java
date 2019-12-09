@@ -2,16 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
-public class DisplayTimer {
+public class DisplayTimer extends Timer{
 	MyStage background;
     static final int offset= 30;
     static final int maxScore = 800;
     static final int baseWidth = 300;
     static final int baseHeight = 25;
 
-    long lastTime; 
-	long now;
-	int seconds;
 	int amountTime;
 	int amountDigits;
 	private boolean timesUp;
@@ -20,9 +17,8 @@ public class DisplayTimer {
      * This method initialises the score and sets the score display to 0
      */
     public DisplayTimer(MyStage background, int amountTime) {
+    	super();
         this.background = background;
-        seconds = 0;
-        lastTime = 0;
         this.amountTime = amountTime;
         amountDigits = calculateAmountDigits(amountTime);
         setNumber(amountTime);
@@ -39,6 +35,7 @@ public class DisplayTimer {
     	return shift;
     }
     
+    @Override
     public void incrementSeconds() {
     	seconds++;
     	setNumber(amountTime-seconds);
@@ -63,24 +60,11 @@ public class DisplayTimer {
 	    }
 
     }
-
-    public long getLastTime() {
-    	return lastTime;
-    }
     
-    public long setLastTime(long now) {
-    	return lastTime = now;
-    }
-	
     public boolean getTimesUp() {
     	return timesUp;
     }
     
-    public void resetTimer() {
-    	seconds = 0;
-    }
-    
-    public int getSeconds() {
-    	return seconds;
-    }
 }
+    
+

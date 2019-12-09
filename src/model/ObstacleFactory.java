@@ -19,6 +19,9 @@ public class ObstacleFactory {
 			if(typeOfActor == ActorTypes.TruckSmall){
 				p = new TruckSmall(xpos,ypos,s);
 			}
+			if(typeOfActor == ActorTypes.Ambulance){
+				p = new Ambulance(xpos,ypos,s);
+			}
         }
 		return p;
 	}

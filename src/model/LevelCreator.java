@@ -23,6 +23,7 @@ public class LevelCreator {
 		  LogSmall,
 		  TruckBig,
 		  TruckSmall,
+		  Ambulance,
 		  EndBlock,
 		  WetTurtle,
 		  NormalTurtle
@@ -108,6 +109,10 @@ public class LevelCreator {
     		}
 
     	}
+    }
+    
+    public void addItem() {
+    	
     }
 
 }
