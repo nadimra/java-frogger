@@ -27,4 +27,9 @@ public class Heart extends Actor{
 
 	}
 	
+	public void setAlive() {
+		setImage(aliveImg);
+
+	}
+	
 }

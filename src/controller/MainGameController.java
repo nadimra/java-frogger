@@ -156,7 +156,14 @@ public class MainGameController extends Application{
 	                     displayTimer.setLastTime(now);
 
 		            }
-		        	
+		        	if(levelManager.needUpdate()) {
+		        		System.out.println("need to update");
+		        		levelManager.updateAdditions();
+		        	}
+		        	if(animal.getCollidedDroppedHeart()) {
+		        		background.remove(animal.getHeartCollision());
+		        		lives.addLives();
+		        	}
 
 	        }
     	};

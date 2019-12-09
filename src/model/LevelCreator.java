@@ -111,8 +111,27 @@ public class LevelCreator {
     	}
     }
     
+    
+    
+    public boolean needUpdateAdditions() {
+    	for(Lane lane:lanesCollection) {
+    		if(lane.needToAdd()) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
     public void addItem() {
-    	
+    	for(Lane lane:lanesCollection) {
+    		if(lane.needToAdd()){
+    			ArrayList<Actor> actorsToAdd = lane.getAddedLaneItems();
+    			for(Actor item:actorsToAdd) {
+    				background.add(item);
+    			}
+    			lane.clearAddedLaneItems();
+    		}
+    	}	
     }
 
 }

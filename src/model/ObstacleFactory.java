@@ -7,7 +7,7 @@ import model.LevelCreator.ActorTypes;
 public class ObstacleFactory {
     private static HashMap <String, Obstacle> hm = new HashMap<String, Obstacle>(); 
 
-	public static Obstacle getTruck(ActorTypes typeOfActor, int xpos, int ypos, double s){
+	public static Obstacle getObstacle(ActorTypes typeOfActor, int xpos, int ypos, double s,Lane lane){
         Obstacle p = null; 
         if (hm.containsKey(typeOfActor)) 
             p = hm.get(typeOfActor); 
@@ -20,7 +20,7 @@ public class ObstacleFactory {
 				p = new TruckSmall(xpos,ypos,s);
 			}
 			if(typeOfActor == ActorTypes.Ambulance){
-				p = new Ambulance(xpos,ypos,s);
+				p = new Ambulance(xpos,ypos,s, lane);
 			}
         }
 		return p;

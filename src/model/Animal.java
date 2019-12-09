@@ -49,6 +49,8 @@ public class Animal extends Actor {
 	ArrayList<End> inter = new ArrayList<End>();
 	private boolean updateDeath;
 	private int numEnds;
+	private boolean collideDroppedHeart;
+	private DroppedHeart heartCollision;
 	
 
 	/**
@@ -244,6 +246,10 @@ public class Animal extends Actor {
 		else if (getIntersectingObjects(End.class).size() >= 1) {
 			handleEndCollision();
 		}
+		else if (getIntersectingObjects(DroppedHeart.class).size() >= 1) {
+			collideDroppedHeart = true;
+			heartCollision =getOneIntersectingObject(DroppedHeart.class);
+		}
 		else if (getY()<413){
 			waterDeath = true;
 		}
@@ -337,6 +343,14 @@ public class Animal extends Actor {
 	
 	public void setW(double setW) {
 		w = setW;
+	}
+	
+	public boolean getCollidedDroppedHeart() {
+		return collideDroppedHeart;
+	}
+	
+	public DroppedHeart getHeartCollision() {
+		return heartCollision;
 	}
 	
 	public Image getImage(String imageName) {

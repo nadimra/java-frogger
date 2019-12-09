@@ -14,13 +14,15 @@ public class Lane extends Actor {
 	private int offset;
 	private MyStage background;
 	private ArrayList<Actor> itemCollection;
-	private ArrayList<Ambulance> ambulanceCollection = new ArrayList<>();
+	private ArrayList<Actor> addedLaneItems = new ArrayList<>();
 
 	
 	
 	public Lane(MyStage background, int laneNum, double speed, ActorTypes typeOfActor, int numActors, int xStartPos, int offset) {
 		
 		itemCollection = new ArrayList<Actor>();
+		addedLaneItems = new ArrayList<Actor>();
+
 
 		this.background = background;
 
@@ -57,13 +59,10 @@ public class Lane extends Actor {
 					shift = shift + offset;
 				}
 				if(typeOfActor == ActorTypes.TruckBig || typeOfActor == ActorTypes.TruckSmall || typeOfActor == ActorTypes.Ambulance) {
-					Actor obs = ObstacleFactory.getTruck(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
+					Actor obs = ObstacleFactory.getObstacle(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed,this);
 					itemCollection.add(obs);
 					background.add(obs);
 					shift = shift + offset;
-					if(typeOfActor == ActorTypes.Ambulance) {
-						addObserver((Ambulance) obs);
-					}
 				}
 				
 				if(typeOfActor == ActorTypes.EndBlock) {
@@ -99,21 +98,48 @@ public class Lane extends Actor {
 	private void calculateOffset() {
 		offset = ((Main.maxWidth-(End.imgSize*numActors))/(numActors+1));
 	}
-
+	
+	/*
+	 * Get items that were added after the level has been updated
+	 * 
+	 */
+	public ArrayList<Actor> getAddedLaneItems() {
+		return addedLaneItems;
+	}
+	
+	/*
+	 * Add an item that needs to be updated after the level has been created
+	 * 
+	 */
+	public void addLaneItem(Actor item) {
+		addedLaneItems.add(item);
+	}
+	
+	/*
+	 * Return a boolean if the level needs to be updated
+	 * 
+	 */
+	public boolean needToAdd() {
+		return addedLaneItems.size()>0;
+	}
+	
+	/*
+	 * Items have been added, so can be removed from the list
+	 * 
+	 */
+	public void clearAddedLaneItems() {
+		addedLaneItems.clear();
+	}
+	
+	
+	
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public void addObserver(Ambulance ambulance) {
-		ambulanceCollection.add(ambulance);
-	}
-	
-	public void removeObserver(Ambulance ambulance) {
-		ambulanceCollection.remove(ambulance);
-	}
-	
+
 	
 	
 }

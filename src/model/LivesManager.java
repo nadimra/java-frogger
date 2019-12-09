@@ -46,6 +46,17 @@ public class LivesManager {
     	return updateLives;
     }
     
+    public void addLives() {
+    	if(numLives<originalLives){
+    		numLives = numLives + 1;
+    	
+	    	Heart last = livesCollection.get(livesCollection.size() - (originalLives - numLives)-1); 
+	    	last.setAlive();
+	    	setUpdateLives(true);
+    	}	
+    	
+    }
+    
     public void loseLife() {
     	numLives = numLives - 1;
     	Heart last = livesCollection.get(livesCollection.size() - (originalLives - numLives)); 

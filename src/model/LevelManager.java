@@ -27,4 +27,12 @@ public class LevelManager {
 	public int getNumEnds() {
 		return level.getNumEnds();
 	}
+	
+	public boolean needUpdate() {
+		return level.needUpdateAdditions();
+	}
+	
+	public void updateAdditions() {
+		level.addItem();;
+	}
 }
