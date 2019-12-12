@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import javafx.scene.image.Image;
+import sprites.Heart;
 
 public class LivesManager {
 	private static int numLives;

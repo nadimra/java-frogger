@@ -11,20 +11,33 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 
+/**
+* This class manages the highscores for each level, class is a singleton
+* 
+* @author Nadim Rahman
+* 
+*/
 public class HighscoreManagerSingleton {
 
 	private static HighscoreManagerSingleton SINGLE_INSTANCE = null;
-	
-	
     private ArrayList<Highscore> scores;
+    
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    
     private String fileName = "src/resources/highscores.txt";
 
+    /**
+    * Initialises the highscore list
+    */
     private HighscoreManagerSingleton() {
     	scores = new ArrayList<Highscore>();
     }
 
+    /**
+    * Method makes sure class is only created once
+    * 
+    */
     public static HighscoreManagerSingleton getInstance() {
     	if(SINGLE_INSTANCE == null) {
     		SINGLE_INSTANCE = new HighscoreManagerSingleton();
@@ -32,17 +45,29 @@ public class HighscoreManagerSingleton {
 		return SINGLE_INSTANCE;
     }
     
+    /**
+    * @return an observable list of all the scores
+    * @throws FileNotFoundException
+    */
     public ObservableList<Highscore> getScores() throws FileNotFoundException {
+    	//First load the file and update the collection list
         loadScoreFile();
+        //Convert the list into an observable list
         ObservableList<Highscore> observableScores = FXCollections.observableArrayList(scores);
 
         return observableScores;
     }
     
+    /**
+     * Checks if the user score is in the top 10 scores
+     * @param userScore
+     * @return boolean to decide if score in top 10
+    */
     public boolean checkTopTen(int userScore) throws FileNotFoundException {
         loadScoreFile();
         IntegerProperty userScoreIntProperty = new SimpleIntegerProperty(userScore);
 
+        // Compares the last score in the file with the new score
         IntegerProperty lastScore = scores.get(scores.size() - 1).getScore() ;
         if(userScoreIntProperty.getValue() > lastScore.getValue()) {
         	return true;
@@ -50,21 +75,35 @@ public class HighscoreManagerSingleton {
 		return false;
     }
     
+    /**
+     * Sorts the scores list using the highscore comparator
+    */
     private void sort() {
     	HighscoreComparator comparator = new HighscoreComparator();
         Collections.sort(scores, comparator);
     }
     
+    /**
+     * Add score to the highscore
+     * @param name
+     * @param score
+     * @throws FileNotFoundException
+    */
     public void addScore(String name, int score) throws FileNotFoundException {
         loadScoreFile();
+        //Remove the last score and add the new score to the file
         scores.remove(scores.size() - 1 );
         scores.add(new Highscore(name, score));
         sort();
+        //Update the file with the new score list
         updateScoreFile();
     }
     
+    /**
+     * Loads the score file and scans each line
+     * @throws FileNotFoundException
+    */
     public void loadScoreFile() throws FileNotFoundException {
-    	
     	List<List<String>> records = new ArrayList<>();
     	try (Scanner scanner = new Scanner(new File(fileName));) {
     	    while (scanner.hasNextLine()) {
@@ -85,24 +124,31 @@ public class HighscoreManagerSingleton {
         return values;
     }
     
+    /**
+     * Converts each record into a highscore
+     * @param records
+    */
     private void convertRecords(List<List<String>> records) {
     	scores.clear();
     	for(List<String> record : records) {
     		String name = record.get(0);
     		int score = Integer.parseInt(record.get(1));
     		Highscore hs = new Highscore(name,score);
+    		//add to the scores list
     		scores.add(hs);
     	}
     }
     
+    /**
+     * Method updates the text file with the new score
+    */
     public void updateScoreFile() {
     	FileWriter fileWriter = null;
         
         try {
             fileWriter = new FileWriter(fileName);
- 
-             
-            //Write a new student object list to the CSV file
+              
+            //Write a new score object list to the text file
             for (Highscore hs : scores) {
             	
                 fileWriter.append(hs.getName().getValue());
@@ -110,8 +156,6 @@ public class HighscoreManagerSingleton {
                 fileWriter.append(String.valueOf(hs.getScore().getValue()));
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
- 
-             
                           
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,13 +171,4 @@ public class HighscoreManagerSingleton {
         }
      }        
     
-    public void getHighscoreString() throws FileNotFoundException {
-
-        ObservableList<Highscore> scores;
-        scores = getScores();
-
-        for(Highscore hs: scores) {
-        	System.out.println(hs.getName().getValue());
-        }
-    }
 }

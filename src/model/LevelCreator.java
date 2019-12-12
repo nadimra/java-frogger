@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import sprites.Actor;
 
 public class LevelCreator {
 
@@ -17,7 +18,7 @@ public class LevelCreator {
     
     private ArrayList<Lane> lanesCollection;
     
-	enum ActorTypes {
+	public static enum  ActorTypes {
 		  LogBig,
 		  LogMedium,
 		  LogSmall,

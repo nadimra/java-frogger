@@ -1,11 +1,23 @@
 package model;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import model.LevelCreator.ActorTypes;
+import sprites.Actor;
+import sprites.LogFactory;
+import sprites.ObstacleFactory;
+import sprites.TurtleFactory;
+import sprites.End;
 
+/**
+* This class creates a lane with objects
+* 
+* @author Nadim Rahman
+* 
+*/
 public class Lane extends Actor {
-	static final int LANE_SIZE = 50;
+	public static final int LANE_SIZE = 50;
 	private int laneNum;
 	private double speed;
 	private ActorTypes typeOfActor;
@@ -17,7 +29,18 @@ public class Lane extends Actor {
 	private ArrayList<Actor> addedLaneItems = new ArrayList<>();
 
 	
-	
+	/**
+	* Initialises the variables
+	* 
+	* @param background
+	* @param laneNum
+	* @param speed
+	* @param typeOfActor
+	* @param numActors
+	* @param xStartPos
+	* @param offset
+	* 
+	*/
 	public Lane(MyStage background, int laneNum, double speed, ActorTypes typeOfActor, int numActors, int xStartPos, int offset) {
 		
 		itemCollection = new ArrayList<Actor>();
@@ -38,6 +61,18 @@ public class Lane extends Actor {
 		
 	}
 	
+	/**
+	* Initialises the variables, used for end objects
+	* 
+	* @param background
+	* @param laneNum
+	* @param speed
+	* @param typeOfActor
+	* @param numActors
+	* @param xStartPos
+	* @param offset
+	* 
+	*/
 	public Lane(MyStage background, int laneNum, ActorTypes typeOfActor, int numActors) {
 		itemCollection = new ArrayList<Actor>();
 		
@@ -49,9 +84,16 @@ public class Lane extends Actor {
 
 	}
 
+	/**
+	* Populates the lane with objects
+	* 
+	*/
 	private void populateLane() {
 		int shift = 0;
+		// Loops through the number of actors to add
 		for(int i=1; i<= numActors; i++) {
+				// Check the type of actor and call the assigned factory
+				// Add item to the item collection and add to the stage, adjust shift so that next actor is positioned correctly
 				if(typeOfActor == ActorTypes.LogBig || typeOfActor == ActorTypes.LogMedium || typeOfActor == ActorTypes.LogSmall) {
 					Actor log = LogFactory.getLog(typeOfActor, xStartPos + shift, laneNum*LANE_SIZE, speed);
 					itemCollection.add(log);
@@ -84,6 +126,10 @@ public class Lane extends Actor {
 		}
 	}
 	
+	/**
+	* Get each item in the lane and remove from the background
+	* 
+	*/
 	public void clearLane() {
 		for(Actor item: itemCollection) {
 			background.remove(item);
@@ -95,11 +141,15 @@ public class Lane extends Actor {
 		return itemCollection;
 	}
 	
+	/**
+	* Method to calculate the spacing of the end objects
+	* 
+	*/
 	private void calculateOffset() {
 		offset = ((Main.maxWidth-(End.imgSize*numActors))/(numActors+1));
 	}
 	
-	/*
+	/**
 	 * Get items that were added after the level has been updated
 	 * 
 	 */
@@ -107,7 +157,7 @@ public class Lane extends Actor {
 		return addedLaneItems;
 	}
 	
-	/*
+	/**
 	 * Add an item that needs to be updated after the level has been created
 	 * 
 	 */
@@ -115,15 +165,15 @@ public class Lane extends Actor {
 		addedLaneItems.add(item);
 	}
 	
-	/*
-	 * Return a boolean if the level needs to be updated
+	/**
+	 * @return a boolean if the level needs to be updated
 	 * 
 	 */
 	public boolean needToAdd() {
 		return addedLaneItems.size()>0;
 	}
 	
-	/*
+	/**
 	 * Items have been added, so can be removed from the list
 	 * 
 	 */

@@ -1,5 +1,7 @@
 package model;
- 
+
+import sprites.Digit;
+
 /**
  * The object of this class displays the score to the GUI
  * 

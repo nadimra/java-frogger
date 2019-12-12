@@ -16,9 +16,10 @@ import model.HighscoreManagerSingleton;
 
 
 /**
- * Dialog to edit details of a person.
+ * Dialog controller to edit details of a person.
  * 
  * @author Nadim Rahman
+ * 
  */
 public class HighscoreInputController {
 
@@ -45,7 +46,10 @@ public class HighscoreInputController {
     private void initialize() {
     }
 
-    
+    /**
+     * Sets the score to submit to the highscore list
+     * @param score to display
+     */    
     public void setSubmitScore(int score) {
     	scoreSubmit = score;
     }
@@ -74,19 +78,19 @@ public class HighscoreInputController {
      */
     @FXML
     private void handleSubmit() throws FileNotFoundException {
+    	// Checks if input is within the character bounds
         if (isInputValid()) { 
-
             HighscoreManagerSingleton.getInstance().addScore(inputField.getText(), scoreSubmit);
             okClicked = true;
             dialogStage.close();
         }
         
         else {
+        	// Dont' close until input has correct validation
             validationLabel.setText("Please input a valid name");
 
         }
     }
-
 
     /**
      * Validates the user input in the text fields.

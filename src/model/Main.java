@@ -42,8 +42,8 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	
-    static final int maxWidth = 600;
-    static final int maxHeight = 800;
+   public  static final int maxWidth = 600;
+    public static final int maxHeight = 800;
     
 	private MyStage background;
 	private Stage primaryStage;
