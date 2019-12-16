@@ -55,12 +55,11 @@ public class Main extends Application {
     private AnchorPane gameOverScreen;
     private AnchorPane highscoreScreen;
 	private AnchorPane levelIntroScreen;
-
-
-
     private MainGameController game;
 
-	
+    public static void main(String[] args) {
+        launch();
+    }
 	
 	/**
 	 * This method loads the initial GUI.
