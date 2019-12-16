@@ -42,7 +42,7 @@ import javafx.util.Duration;
 
 public class Main extends Application {
 	
-   public  static final int maxWidth = 600;
+    public  static final int maxWidth = 600;
     public static final int maxHeight = 800;
     
 	private MyStage background;
@@ -76,20 +76,21 @@ public class Main extends Application {
 
 	
     /**
-     * Initializes the root layout.
+     * Shows the main menu
      */
     public void showMenu() {
         try {
-            // Load root layout from fxml file.
+            // Load menu layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/Menu.fxml"));
             menuScreen = (AnchorPane) loader.load();
             
-            // Show the scene containing the root layout.
+            // Show the scene containing the menu
             Scene scene = new Scene(menuScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
+            // Assign the controller for the menu
             MenuController controller = loader.getController();
             controller.setMainApp(this);
             
@@ -100,20 +101,18 @@ public class Main extends Application {
     
     
     /**
-     * Initializes the root layout.
-     * @throws FileNotFoundException 
+     * Shows the game
      */
     public void showGame() throws FileNotFoundException {
-            // Load root layout from fxml file.
         	game = new MainGameController();
         	game.setMainApp(this);
         	game.initialize();
         	primaryStage.setScene(game.getScene());
-        	primaryStage.show();  	
+        	primaryStage.show();
     }
     
     /**
-     * Initializes the root layout.
+     * Shows the continued game before the user paused the game
      */
     public void showContinuedGame() {
             // Load root layout from fxml file.
@@ -123,20 +122,21 @@ public class Main extends Application {
     }
     
     /**
-     * Initializes the root layout.
+     * Shows the pause menu
      */
     public void showPauseMenu(int points) {
         try {
-            // Load root layout from fxml file.
+            // Load pause menu layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/PauseMenu.fxml"));
             pauseScreen = (AnchorPane) loader.load();
             
-            // Show the scene containing the root layout.
+            // Show the scene containing the pause menu
             Scene scene = new Scene(pauseScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
+            // Assigns the controller for the pause menu
             PauseMenuController controller = loader.getController();
             controller.setCurrentPoints(points);
             controller.setMainApp(this);
@@ -148,20 +148,21 @@ public class Main extends Application {
     
     
     /**
-     * Initializes the root layout.
+     * Shows the help screen
      */
     public void showHelpMenu() {
         try {
-            // Load root layout from fxml file.
+            // Load help screen layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/HelpMenu.fxml"));
             helpScreen = (AnchorPane) loader.load();
             
-            // Show the scene containing the root layout.
+            // Show the scene containing the help screen
             Scene scene = new Scene(helpScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
+            // Assign the controller for the help screen
             HelpMenuController controller = loader.getController();
             controller.setMainApp(this);
             
@@ -172,20 +173,24 @@ public class Main extends Application {
     
     
     /**
-     * Initializes the root layout.
+     * Shows the game over screen
+     * @param points to display
+     * @param win to determine if the user completed all the levels
+     * @param earnedHighscore to check if they can submit a highscore
      */
     public void showGameOver(int points, boolean win, boolean earnedHighscore) {
         try {
-            // Load root layout from fxml file.
+            // Load game over layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/GameOver.fxml"));
             gameOverScreen = (AnchorPane) loader.load();
             
-            // Show the scene containing the root layout.
+            // Show the scene containing the game over screen
             Scene scene = new Scene(gameOverScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
+            // Assigns the controller to the screen
             GameOverController controller = loader.getController();
             controller.setPoints(points);
             controller.setWinOrLose(win);
@@ -198,22 +203,22 @@ public class Main extends Application {
     }
     
     /**
-     * Initializes the root layout.
+     * Shows the highscore screen
      */
     public void showHighscoreScreen() {
         try {
-            // Load root layout from fxml file.
+            // Load highscore layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/view/Highscore.fxml"));
             highscoreScreen = (AnchorPane) loader.load();
             
-            // Show the scene containing the root layout.
+            // Show the scene containing the highscore screen
             Scene scene = new Scene(highscoreScreen);
             primaryStage.setScene(scene);
             primaryStage.show();
             
+            // Assigns the controller for the highscore screen
             HighscoreController controller = loader.getController();
-            //controller.setValuesInTable(new HighscoreManager().getScores());
 
             controller.setMainApp(this,HighscoreManagerSingleton.getInstance().getScores());
             

@@ -113,6 +113,11 @@ public class HighscoreManagerSingleton {
     	convertRecords(records);
     }
     
+    /**
+     * This method converts a text line from the text file and converts it into a list
+     * @param line from highscore file
+     * @return a list of string values of that line
+     */
     private List<String> getRecordFromLine(String line) {
         List<String> values = new ArrayList<String>();
         try (Scanner rowScanner = new Scanner(line)) {

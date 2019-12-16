@@ -151,7 +151,7 @@ public class Lane extends Actor {
 	
 	/**
 	 * Get items that were added after the level has been updated
-	 * 
+	 * @return a list of actor objects that need to be added
 	 */
 	public ArrayList<Actor> getAddedLaneItems() {
 		return addedLaneItems;
@@ -159,7 +159,7 @@ public class Lane extends Actor {
 	
 	/**
 	 * Add an item that needs to be updated after the level has been created
-	 * 
+	 * @param item to add to lane
 	 */
 	public void addLaneItem(Actor item) {
 		addedLaneItems.add(item);
@@ -181,8 +181,7 @@ public class Lane extends Actor {
 		addedLaneItems.clear();
 	}
 	
-	
-	
+
 	@Override
 	public void act(long now) {
 		// TODO Auto-generated method stub
