@@ -16,10 +16,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import sprites.Actor;
 
-
+/**
+ * This class controls the display of the screen
+ * @author Nadim Rahman
+ *
+ */
 public abstract class World extends Pane {
     private AnimationTimer timer;
     
+    /**
+     * Adds a change listener 
+     * Handles all the actors when a key is pressed
+     */
     public World() {
     	
     	sceneProperty().addListener(new ChangeListener<Scene>() {
@@ -65,6 +73,9 @@ public abstract class World extends Pane {
 		});
     }
 
+    /**
+     * Creates a timer and calls the handle method for each actor for each fram
+     */
     public void createTimer() {
         timer = new AnimationTimer() {
             @Override
@@ -80,24 +91,43 @@ public abstract class World extends Pane {
         };
     }
 
+    /** 
+     * Starts the timer
+     */
     public void start() {
     	createTimer();
         timer.start();
     }
 
+    /**
+     * Stops the timer
+     */
     public void stop() {
         timer.stop();
     }
     
+    /**
+     * Adds a new actor to the screen
+     * @param actor
+     */
     public void add(Actor actor) {
         getChildren().add(actor);
     }
 
+    /**
+     * Removes an actor from the screen
+     * @param actor
+     */
     public void remove(Actor actor) {
         getChildren().remove(actor);
     }
     
-
+    /**
+     * Gets a list of all the actors
+     * @param <A> the class of actors
+     * @param cls
+     * @return the list of actors
+     */
     public <A extends Actor> List<A> getObjects(Class<A> cls) {
         ArrayList<A> someArray = new ArrayList<A>();
         for (Node n: getChildren()) {

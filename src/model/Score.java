@@ -24,6 +24,7 @@ public class Score {
     
     /**
      * This method initialises the score and sets the score display to 0
+     * @param background is the main window
      */
     public Score(MyStage background) {
         this.background = background;
@@ -32,7 +33,7 @@ public class Score {
    
     /**
      * This method manages the scoring display and is updated after each change
-     *
+     *@param n is the number to display
      */
     public void setNumber(int n) {
     	int shift = 0;
@@ -67,6 +68,10 @@ public class Score {
 		return changeScore;
 	}
 	
+	/**
+	 * This method is called to see if the score has been updated on the screen
+	 * @return
+	 */
 	public boolean updateScore() {
 		if(changeScore) {
 			changeScore = false;

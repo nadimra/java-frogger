@@ -2,6 +2,11 @@ package sprites;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class represents the background image of the game
+ * @author Nadim Rahman
+ *
+ */
 public class BackgroundImage extends Actor{
 
 	@Override

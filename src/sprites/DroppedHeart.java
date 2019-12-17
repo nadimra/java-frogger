@@ -2,6 +2,11 @@ package sprites;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class creates a dropped heart from an Ambulance 
+ * @author Nadim Rahman
+ *
+ */
 public class DroppedHeart extends Actor {
 	int dim = 40;
 	Image heartImage;
@@ -14,10 +19,15 @@ public class DroppedHeart extends Actor {
 		
 	}
 	
-	public DroppedHeart(double d, int y) {
+	/**
+	 * Create a dropped heart and place the image
+	 * @param x position
+	 * @param y position
+	 */
+	public DroppedHeart(double x, int y) {
 		heartImage = new Image("file:src/resources/heart.png", dim, dim, true, true);
 		setImage(heartImage);
-		setX(d);
+		setX(x);
 		setY(y);
 	}
 	

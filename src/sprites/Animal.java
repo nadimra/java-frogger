@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import model.Lane;
 import model.LivesManager;
 import model.Main;
 import model.Score;
@@ -20,14 +21,14 @@ import model.Score;
  *
  */
 public class Animal extends Actor {
-	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
-	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
+	private Image imgW1;
+	private Image imgA1;
+	private Image imgS1;
+	private Image imgD1;
+	private Image imgW2;
+	private Image imgA2;
+	private Image imgS2;
+	private Image imgD2;
 	
 	int points = 0;
 	int end = 0;
@@ -59,6 +60,8 @@ public class Animal extends Actor {
 	/**
 	 * This method sets up the class and initialises key variables.
 	 * @param imageLink stores the image of the frog.
+	 * @param score 
+	 * @param lives
 	 * 
 	 */
 	public Animal(String imageLink, Score score, LivesManager lives) {
@@ -144,6 +147,10 @@ public class Animal extends Actor {
 		end=0;
 	}
 	
+	/**
+	 * Sets the number of ends there are in the level
+	 * @param n for number of ends
+	 */
 	public void setNumEnds(int n) {
 		numEnds = n;
 	}
@@ -235,7 +242,7 @@ public class Animal extends Actor {
 	 */
 	private void handleCollision() {
 		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
+			handleCarCollision();
 		}
 		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
 			handleLogCollision();
@@ -253,7 +260,7 @@ public class Animal extends Actor {
 			collideDroppedHeart = true;
 			heartCollision =getOneIntersectingObject(DroppedHeart.class);
 		}
-		else if (getY()<413){
+		else if (getY()<Lane.LANE_SIZE*9 -25){
 			waterDeath = true;
 		}
 	}
@@ -263,9 +270,7 @@ public class Animal extends Actor {
 	 * 
 	 */
 	private void handleCarCollision() {
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
-		}
+		carDeath = true;
 	}
 	
 	/**
@@ -282,7 +287,7 @@ public class Animal extends Actor {
 	 * 
 	 */
 	private void handleTurtleCollision() {
-		move(-1,0);
+		move(getIntersectingObjects(NormalTurtle.class).get(0).getSpeed(),0);
 	}
 	
 	/**
@@ -293,7 +298,8 @@ public class Animal extends Actor {
 		if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
 			waterDeath = true;
 		} else {
-			move(-1,0);
+			// Move the player with the turtle
+			move(getIntersectingObjects(WetTurtle.class).get(0).getSpeed(),0);
 		}
 	}
 	
@@ -304,18 +310,20 @@ public class Animal extends Actor {
 	private void handleEndCollision() {
 		inter = (ArrayList<End>) getIntersectingObjects(End.class);
 		if (getIntersectingObjects(End.class).get(0).isActivated()) {
-			end--;
 		}
-		score.updatePoints(50);
-		w=800;
-		getIntersectingObjects(End.class).get(0).setEnd();
-		end++;
+		else {
+			score.updatePoints(50);
+			getIntersectingObjects(End.class).get(0).setEnd();
+			end++;
+		}
+		setW(Main.maxHeight);
+		// Reset player position
 		initialisePlayer("file:src/resources/froggerUp.png");
 	}
 	
 	/**
 	 * Method to control the player when they get restarted to the start point.
-	 * 
+	 * @param imageLink is the image of the player sprite
 	 */
 	private void initialisePlayer(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
@@ -327,7 +335,10 @@ public class Animal extends Actor {
 		carD = 0;
 	}
 	
-	
+	/**
+	 * Check if the player is moving
+	 * @return noMove 
+	 */
 	public boolean getNoMove() {
 		return noMove;
 	}
@@ -348,6 +359,10 @@ public class Animal extends Actor {
 		w = setW;
 	}
 	
+	/**
+	 * Check if the user has collected a dropped heart
+	 * @return collideDroppedHeart
+	 */
 	public boolean getCollidedDroppedHeart() {
 		return collideDroppedHeart;
 	}
@@ -360,6 +375,11 @@ public class Animal extends Actor {
 		return heartCollision;
 	}
 	
+	/**
+	 * Return an image link depending on the actors movement
+	 * @param imageName is the movement the actor made
+	 * @return an Image
+	 */
 	public Image getImage(String imageName) {
 		switch(imageName) {
 		  case "W1":

@@ -6,6 +6,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
+/**
+ * This class extends from the World class and controls the music
+ * @author Nadim Rahman
+ *
+ */
 public class MyStage extends World{
 	MediaPlayer mediaPlayer;
 	@Override
@@ -15,19 +20,12 @@ public class MyStage extends World{
 	
 	public MyStage() {
 		
-//		mediaPlayer.play();
-//		mediaPlayer.setOnEndOfMedia(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				mediaPlayer.seek(Duration.ZERO);
-//				
-//			}
-//			
-//		});
-//		mediaPlayer.play();
 	}
 	
+	/** 
+	 * This method plays the music
+	 * 
+	 */
 	public void playMusic() {
 		String musicFile = "src/resources/Frogger Main Song Theme (loop).mp3";   
 		Media sound = new Media(new File(musicFile).toURI().toString());
@@ -36,6 +34,9 @@ public class MyStage extends World{
 	    mediaPlayer.play();
 	}
 	
+	/**
+	 * This method stops the music
+	 */
 	public void stopMusic() {
 		mediaPlayer.stop();
 	}

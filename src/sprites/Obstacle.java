@@ -2,6 +2,11 @@ package sprites;
 
 import javafx.scene.image.Image;
 
+/**
+ * This class creates an obstacle for the roads
+ * @author Nadim Rahman
+ *
+ */
 public abstract class Obstacle extends Actor {
 	protected double speed;
 	protected int xSize;
@@ -12,6 +17,12 @@ public abstract class Obstacle extends Actor {
 	public void act(long now) {
 	}
 	
+	/**
+	 * Initialises the variables and sets the positions
+	 * @param xpos
+	 * @param ypos
+	 * @param s
+	 */
 	public Obstacle(int xpos, int ypos, double s) {
 		setX(xpos);
 		setY(ypos);
@@ -38,6 +49,10 @@ public abstract class Obstacle extends Actor {
 		return ySize;
 	}
 	
+	/**
+	 * Assigns the direction
+	 * @return direction
+	 */
 	protected String setDirection() {
 		if(speed>= 0) {
 			return "Right.png";

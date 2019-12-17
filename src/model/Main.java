@@ -226,6 +226,11 @@ public class Main extends Application {
         }
     }
     
+    /**
+     * Show the input window for highscores
+     * @param points the number of points to submit to the highscore table
+     * @return true if the submit button is clicked
+     */
     public boolean showHighscoreInput(int points) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
@@ -241,7 +246,7 @@ public class Main extends Application {
             Scene scene = new Scene(highscoreInput);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Assign the controller for the window
             HighscoreInputController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setSubmitScore(points);
@@ -257,7 +262,9 @@ public class Main extends Application {
     }
     
     /**
-     * Initializes the root layout.
+     * Show the intro dialog at the start of every level
+     * @param levelNum the current level the user is playing
+     * @param highscore the highscore for the current level
      */
     public void showLevelIntro(int levelNum, int highscore) {
         try {
@@ -274,18 +281,17 @@ public class Main extends Application {
             Scene scene = new Scene(levelIntro);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the controller for the level intro
             LevelIntroController controller = loader.getController();
             controller.setDialogStage(dialogStage,levelNum,highscore);
 
+            // Hide the dialog once 3 seconds have passed
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(e -> dialogStage.hide());
 
             dialogStage.show();
             delay.play();
             
-            // Show the dialog and wait until the user closes it
-
             
         } catch (IOException e) {
         }

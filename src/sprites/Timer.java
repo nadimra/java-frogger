@@ -1,5 +1,10 @@
 package sprites;
 
+/**
+ * This class manages a timer
+ * @author Nadim Rahman
+ *
+ */
 public class Timer {
 	
     long lastTime; 
@@ -11,6 +16,9 @@ public class Timer {
         lastTime = 0;
 	}
 	
+	/**
+	 * Increment seconds when a second has passed
+	 */
     public void incrementSeconds() {
     	seconds++;
     }
@@ -19,10 +27,17 @@ public class Timer {
     	return lastTime;
     }
     
+    /**
+     * @param now the time the object has lived for
+     * @return lastTime
+     */
     public long setLastTime(long now) {
     	return lastTime = now;
     }
     
+    /**
+     * Reset the timer when game restarts
+     */
     public void resetTimer() {
     	seconds = 0;
     }

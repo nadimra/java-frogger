@@ -5,34 +5,21 @@ import model.Lane;
 
 public class LogSmall extends Log {
 	
-	private int xSize = 84;
-	private int ySize = 35;
+	private static int xSize = 84;
+	private static int ySize = 35;
 	private String imageLink = "file:src/resources/log2.png";
 	
+	/**
+	 * Initialises the variables and sets the image
+	 * @param xpos
+	 * @param yposAssigned
+	 * @param s for speed
+	 */
 	public LogSmall(int xpos, int yposAssigned, double s) { 
-		super(xpos, yposAssigned, s);
+		super(xpos, yposAssigned, s, xSize, ySize);
 		setImage(new Image(imageLink, xSize,ySize, false, true));
 		setPos(xpos,adjustPosY(yposAssigned));
 
 	}
-	
-	@Override
-	public void act(long now) {
-		move(speed , 0);
-		if (getX()>600 && speed>0)
-			setX(-180);
-		if (getX()<-300 && speed<0)
-			setX(700);
-	}
-	
-	private int adjustPosY(int ypos) {
-		return yPos = ((Lane.LANE_SIZE)-ySize)/2+ypos;
-	}
-	
-	private void setPos(int xpos, int ypos) {
-		setX(xpos);
-		setY(ypos);
-	}
-
 	
 }
