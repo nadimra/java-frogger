@@ -17,7 +17,7 @@ import sprites.Actor;
  */
 public class LevelCreator {
 
-    private String fileName = "src/resources/";
+    private String fileName = "src/levels/";
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
     

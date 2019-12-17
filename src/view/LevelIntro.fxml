@@ -12,7 +12,14 @@
 <AnchorPane prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LevelIntroController">
    <children>
       <BorderPane layoutX="28.0" prefHeight="200.0" prefWidth="300.0" style="-fx-border-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
+         <bottom>
+            <Button mnemonicParsing="false" onAction="#onProceedClick" text="PROCEED" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="15.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <center>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL: ">
@@ -26,35 +33,6 @@
                      </font>
                   </Label>
                </children>
-            </HBox>
-         </top>
-         <bottom>
-            <Button mnemonicParsing="false" onAction="#onProceedClick" text="PROCEED" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="15.0" />
-               </BorderPane.margin>
-            </Button>
-         </bottom>
-         <center>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Text fill="#5f9682" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGHSCORE: ">
-                     <font>
-                        <Font name="Agency FB" size="29.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Text>
-                  <Label fx:id="highscoreLabel" text="Label" textFill="WHITE">
-                     <font>
-                        <Font name="Agency FB" size="29.0" />
-                     </font>
-                  </Label>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="25.0" />
-               </BorderPane.margin>
             </HBox>
          </center>
       </BorderPane>

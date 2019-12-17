@@ -23,9 +23,7 @@ public class LevelIntroController {
 	
 	@FXML
 	private Label levelLabel;
-	
-	@FXML
-	private Label highscoreLabel;
+
 	
     /**
      * Initializes the controller class. This method is automatically called
@@ -44,7 +42,6 @@ public class LevelIntroController {
      */
     private void setIntroText(int levelNum,int highscore) {
         levelLabel.setText("" + levelNum);
-        highscoreLabel.setText("" + levelNum);
     }
 	
     /**
