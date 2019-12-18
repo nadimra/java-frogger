@@ -76,6 +76,17 @@ public class HighscoreManagerSingleton {
     }
     
     /**
+     * Returns the top score in the highscore list
+     * @return top score
+     * @throws FileNotFoundException
+     */
+    public int getTopScore() throws FileNotFoundException {
+        loadScoreFile();
+        IntegerProperty topScore = scores.get(0).getScore() ;
+        return topScore.getValue();
+    }
+    
+    /**
      * Sorts the scores list using the highscore comparator
     */
     private void sort() {

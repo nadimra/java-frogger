@@ -56,6 +56,10 @@ public class GameOverController {
     	scoreText.setText("" + points);
     }
     
+    public int getPoints() {
+    	return points;
+    }
+    
     /**
      * Updates the game over screen to display that the user has won or lost
      * @param win is a boolean that determines if the user has won the game or not
@@ -126,5 +130,12 @@ public class GameOverController {
 	public void setMainApp(Main mainApp) {
 		this.mainApp = mainApp;
 	}
+	
+	public String getScoreText() {
+		return scoreText.getText();
+	}
 
+	public String getFeedbackLabel() {
+		return feedbackString.getText();
+	}
 }

@@ -98,5 +98,9 @@ public class LivesManager {
     public boolean getGameOver() {
     	return gameOver;
     }
+    
+    public int getNumLives() {
+    	return numLives;
+    }
 
 }

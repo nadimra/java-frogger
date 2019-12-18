@@ -37,10 +37,9 @@ public class LevelIntroController {
     /**
      * Sets the text of the window to the appropriate data
      * @levelNum is the level the user is playing
-     * @highscore is the highscore of that level
      * 
      */
-    private void setIntroText(int levelNum,int highscore) {
+    public void setIntroText(int levelNum) {
         levelLabel.setText("" + levelNum);
     }
 	
@@ -61,9 +60,9 @@ public class LevelIntroController {
      * @param the level the user is playing
      * @param the highscore for that level
      */
-    public void setDialogStage(Stage dialogStage,int levelNum, int highScore) {
+    public void setDialogStage(Stage dialogStage,int levelNum) {
         this.dialogStage = dialogStage;
-		setIntroText(levelNum, highScore);
+		setIntroText(levelNum);
     }
 
     /**
@@ -72,6 +71,10 @@ public class LevelIntroController {
 	public boolean isProceedClicked() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public String getLevelLabelText() {
+		return levelLabel.getText();
 	}
 
 }
