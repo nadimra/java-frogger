@@ -14,7 +14,13 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP SCREEN STUFF" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="- The objective of the game is to get all the frogs to its 'home'" wrappingWidth="327.46875" />
+                  <Text fill="WHITE" layoutX="146.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- You score 10 points every time you move the frog forward a lane" wrappingWidth="359.46875" />
+                  <Text fill="WHITE" layoutX="130.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- You score an extra 50 points if a frog reaches an deactivated home" wrappingWidth="372.26873779296875" />
+                  <Text fill="WHITE" layoutX="124.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- You recieve a time bonus if you complete a level within the time limit" wrappingWidth="386.668701171875" />
+                  <Text fill="WHITE" layoutX="116.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- You recieve 50 bonus points for each life you have left when all levels are completed" wrappingWidth="461.86865234375" />
+                  <Text fill="WHITE" layoutX="79.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Avoid hitting road obstacles or touching the water" wrappingWidth="309.8685944080353" />
+                  <Text fill="WHITE" layoutX="155.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Avoid hitting an ambulance, although ambulances unload lives at random points" wrappingWidth="442.668582201004" />
                   <Button mnemonicParsing="false" onAction="#onBackClick" text="Back" />
                </children></VBox>
          </center>
