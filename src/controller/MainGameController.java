@@ -277,7 +277,7 @@ public class MainGameController extends Application{
 		background.add(animal);
     	onUpdate();
         timer.start();
-		mainApp.showLevelIntro(levelManager.getCurrentLevel(), 100);
+		mainApp.showLevelIntro(levelManager.getCurrentLevel());
     }
 	
 	/**
@@ -292,7 +292,7 @@ public class MainGameController extends Application{
 		animal.setNumEnds(levelManager.getNumEnds());
 		background.remove(animal);
 		background.add(animal);
-        mainApp.showLevelIntro(levelManager.getCurrentLevel(), 100);
+        mainApp.showLevelIntro(levelManager.getCurrentLevel());
 	}
 	
 	/**

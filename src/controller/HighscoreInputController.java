@@ -77,7 +77,7 @@ public class HighscoreInputController {
      * @throws FileNotFoundException 
      */
     @FXML
-    private void handleSubmit() throws FileNotFoundException {
+    public void handleSubmit() throws FileNotFoundException {
     	// Checks if input is within the character bounds
         if (isInputValid()) { 
             HighscoreManagerSingleton.getInstance().addScore(inputField.getText(), scoreSubmit);
@@ -97,11 +97,23 @@ public class HighscoreInputController {
      * 
      * @return true if the input is valid
      */
-    private boolean isInputValid() {
+    public boolean isInputValid() {
         if (!(inputField.getText().length() >= 3 && inputField.getText().length() <=9 )) {
             return false;
         }
         //validationLabel.setVisible(true);
         return true;
+    }
+    
+    public TextField getInputVield() {
+    	return inputField;
+    }
+    
+    public void setInputVield(String text) {
+    	inputField.setText(text);
+    }
+    
+    public String getValidationLabel() {
+    	return validationLabel.getText();
     }
 }

@@ -267,7 +267,7 @@ public class Main extends Application {
      * @param levelNum the current level the user is playing
      * @param highscore the highscore for the current level
      */
-    public void showLevelIntro(int levelNum, int highscore) {
+    public void showLevelIntro(int levelNum) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -284,7 +284,7 @@ public class Main extends Application {
 
             // Set the controller for the level intro
             LevelIntroController controller = loader.getController();
-            controller.setDialogStage(dialogStage,levelNum,highscore);
+            controller.setDialogStage(dialogStage,levelNum);
 
             // Hide the dialog once 3 seconds have passed
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
