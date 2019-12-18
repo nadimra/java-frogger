@@ -29,7 +29,9 @@ public class Score {
     public Score(MyStage background) {
         this.background = background;
         points =0;
-		background.add(new Digit(0, 30, baseWidth, baseHeight));
+        if(background != null) {
+        	background.add(new Digit(0, 30, baseWidth, baseHeight));
+        }
     }
    
     /**

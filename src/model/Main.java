@@ -60,6 +60,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
 	
 	/**
 	 * This method loads the initial GUI.
