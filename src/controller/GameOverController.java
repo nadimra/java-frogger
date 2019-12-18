@@ -3,6 +3,7 @@ package controller;
 import java.io.FileNotFoundException;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.Main;
@@ -31,6 +32,8 @@ public class GameOverController {
 	private Button submitButton;
 	
 	boolean earnedHighscore;
+	
+	private Scene scene;
 	
 	int points;
 	
@@ -123,5 +126,5 @@ public class GameOverController {
 	public void setMainApp(Main mainApp) {
 		this.mainApp = mainApp;
 	}
-	
+
 }

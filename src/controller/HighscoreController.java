@@ -53,8 +53,10 @@ public class HighscoreController {
      */
 	@FXML
 	private void onBackClick() {
-	    mainApp.showMenu();
+			mainApp.showMenu();
 	}
+
+	
 	
     /**
      * Is called by the main application to give a reference back to itself.
