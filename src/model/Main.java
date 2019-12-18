@@ -33,7 +33,7 @@ import javafx.util.Duration;
 /**
  * The object of this class puts everything together and displays the interface to the user.
  * 
- * @author Nadim Rahman
+ * @author Nadim Rahman test
  * @version 1.0
  * @since 20-11-2019
  *
