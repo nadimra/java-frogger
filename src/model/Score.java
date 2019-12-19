@@ -12,13 +12,13 @@ import sprites.Digit;
  */
 
 public class Score {
-    MyStage background;
+    private MyStage background;
     static final int offset= 30;
     static final int maxScore = 800;
     static final int baseWidth = 560;
     static final int baseHeight = 25;
     private int points;
-    Digit[] digits;
+    private Digit[] digits;
     private boolean changeScore = false;
     
     

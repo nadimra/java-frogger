@@ -30,27 +30,27 @@ public class Animal extends Actor {
 	private Image imgS2;
 	private Image imgD2;
 	
-	int points = 0;
-	int end = 0;
+	private int points = 0;
+	private int end = 0;
 	
 	private boolean secondAnimation = false;
 	boolean noMove = false;
 	
-	double movement = 12.5*2;
-	double movementX = 10.666666*2;
-	int imgSize = 40;
+	private double movement = 12.5*2;
+	private double movementX = 10.666666*2;
+	private int imgSize = 40;
 	
-	boolean carDeath = false;
-	boolean waterDeath = false;
-	int deathCount;
-	LivesManager lives;
+	private boolean carDeath = false;
+	private boolean waterDeath = false;
+	private int deathCount;
+	private LivesManager lives;
 	
 	private Score score;
 	
-	boolean changeScore = false;
-	int carD = 0;
-	double w = 800;
-	ArrayList<End> inter = new ArrayList<End>();
+	private boolean changeScore = false;
+	private int carD = 0;
+	private double w = 800;
+	private ArrayList<End> inter = new ArrayList<End>();
 	private boolean updateDeath;
 	private int numEnds;
 	private boolean collideDroppedHeart;

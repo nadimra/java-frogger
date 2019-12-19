@@ -8,10 +8,8 @@ import javafx.scene.image.Image;
  *
  */
 public class DroppedHeart extends Actor {
-	int dim = 40;
-	Image heartImage;
-	Ambulance ambulance;
-
+	private int dim = 40;
+	private Image heartImage;
 
 	@Override
 	public void act(long now) {

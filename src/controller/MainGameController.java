@@ -238,6 +238,7 @@ public class MainGameController extends Application{
 	public void pauseGame() {
 		background.stop();
 		timer.stop();
+		background.stopMusic();
 		mainApp.showPauseMenu(score.getPoints());
 	}
 	
@@ -246,6 +247,7 @@ public class MainGameController extends Application{
      */
 	public void continueGame() {
 		background.start();
+		background.playMusic();
 		timer.start();
 	}
     
@@ -254,6 +256,7 @@ public class MainGameController extends Application{
      */
 	public void handleGameOver(boolean win) throws FileNotFoundException {
 		background.stopMusic();
+		score.updatePoints(displayTimer.getTimeLeft());
 		stop();
 		background.stop();
 		// Checks if the user has earned a highscore
@@ -270,14 +273,10 @@ public class MainGameController extends Application{
 	public void startGame() throws FileNotFoundException {
 		score.setNumber(0);
 		background.playMusic();
-		levelManager.getNextLevel();
-		displayTimer.resetTimer();
-		animal.setNumEnds(levelManager.getNumEnds());
-		background.remove(animal);
-		background.add(animal);
     	onUpdate();
         timer.start();
-		mainApp.showLevelIntro(levelManager.getCurrentLevel());
+		handleNextLevel();
+
     }
 	
 	/**
@@ -288,6 +287,7 @@ public class MainGameController extends Application{
 	public void handleNextLevel() throws FileNotFoundException {
 		animal.setStop();
 		levelManager.getNextLevel();
+		score.updatePoints(displayTimer.getTimeLeft());
 		displayTimer.resetTimer();
 		animal.setNumEnds(levelManager.getNumEnds());
 		background.remove(animal);

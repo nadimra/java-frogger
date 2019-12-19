@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
  *
  */
 public class End extends Actor{
-	boolean activated = false;
+	private boolean activated = false;
 	public static final int imgSize = 60;
 	public static final int yPos = 96;
 	

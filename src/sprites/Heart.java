@@ -8,9 +8,9 @@ import javafx.scene.image.Image;
  *
  */
 public class Heart extends Actor{
-	int dim;
-	Image aliveImg;
-	Image deadImg;
+	private int dim;
+	private Image aliveImg;
+	private Image deadImg;
 
 	@Override
 	public void act(long now) {

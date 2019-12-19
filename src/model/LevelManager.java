@@ -8,11 +8,11 @@ import java.io.FileNotFoundException;
  *
  */
 public class LevelManager {
-	LevelCreator level;
+	private LevelCreator level;
 	private int currentLevel;
 	
 	// Number of levels in the game
-	public static final int MAX_LEVELS = 2;
+	public static final int MAX_LEVELS = 3;
 
 	/**
 	 * Initialises the variables

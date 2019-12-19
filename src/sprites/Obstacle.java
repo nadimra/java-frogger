@@ -49,20 +49,6 @@ public abstract class Obstacle extends Actor {
 		return ySize;
 	}
 	
-	/**
-	 * Assigns the direction
-	 * @return direction
-	 */
-	protected String setDirection() {
-		if(speed>= 0) {
-			return "Right.png";
-		}
-		if(speed< 0) {
-			return "Left.png";
-		}
-		return "Right.png";
-	}
-
 	protected void setPos(int xpos, int ypos) {
 		setX(xpos);
 		setY(ypos);		

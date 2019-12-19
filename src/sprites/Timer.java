@@ -7,9 +7,9 @@ package sprites;
  */
 public class Timer {
 	
-    long lastTime; 
-	long now;
-	int seconds;
+    private long lastTime; 
+	private long now;
+	protected int seconds;
 	
 	public Timer() {
         seconds = 0;

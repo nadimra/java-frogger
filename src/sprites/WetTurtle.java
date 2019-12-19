@@ -13,7 +13,7 @@ public class WetTurtle extends Turtle{
 	private int xSize = 120;
 	private int ySize = 50; 
 	
-	Image turtle4;
+	private Image turtle4;
 
 	boolean sunk = false;
 	

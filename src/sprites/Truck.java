@@ -39,6 +39,20 @@ public class Truck extends Obstacle {
 			setX(Main.maxWidth);
 	}
 	
+	/**
+	 * Assigns the direction
+	 * @return direction
+	 */
+	protected String setDirection() {
+		if(speed>= 0) {
+			return "Right.png";
+		}
+		if(speed< 0) {
+			return "Left.png";
+		}
+		return "Right.png";
+	}
+
 	protected int adjustPosY(int ypos) {
 		return yPos = ((Lane.LANE_SIZE)-ySize)/2+ypos;
 	}

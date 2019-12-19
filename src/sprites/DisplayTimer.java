@@ -10,14 +10,14 @@ import model.MyStage;
  *
  */
 public class DisplayTimer extends Timer{
-	MyStage background;
+	private MyStage background;
     static final int offset= 30;
     static final int maxScore = 800;
     static final int baseWidth = 300;
     static final int baseHeight = 25;
 
-	int amountTime;
-	int amountDigits;
+	private int amountTime;
+	private int amountDigits;
 	private boolean timesUp;
  
 	/**
@@ -55,7 +55,11 @@ public class DisplayTimer extends Timer{
     @Override
     public void incrementSeconds() {
     	seconds++;
-    	setNumber(amountTime-seconds);
+    	setNumber(getTimeLeft());
+    }
+    
+    public int getTimeLeft() {
+    	return amountTime-seconds;
     }
     
     /**

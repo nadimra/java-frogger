@@ -1,16 +1,16 @@
 0, --
 1, --
 2,EndBlock,2
-3,0.75,LogBig,3,0,220
-4,-2,LogBig,3,400,300
-5,-2,WetTurtle,3,300,170
-6,0.75,LogBig,2,400,200
+3,1.5,LogBig,3,0,220
+4,-2,NormalTurtle,3,400,300
+5,-2,LogBig,3,300,190
+6,-1,NormalTurtle,2,400,200
 7,0.75,LogBig,2,400,200
-8,-0.75,LogSmall,3,0,220
+8,-1,LogSmall,3,0,220
 9, ---
 10,
-11,
-12,
+11,-2,TruckBig,2,200,300
+12,2,TruckSmall,2,200,300
 13,
-14,
+14,3,TruckSmall,3,100,300
 15, --

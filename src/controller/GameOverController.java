@@ -35,7 +35,7 @@ public class GameOverController {
 	
 	private Scene scene;
 	
-	int points;
+	private int points;
 	
     /**
      * Initializes the controller class. This method is automatically called
